@@ -108,5 +108,7 @@ buildNumber.properties
 
 pom.xml
 model_beans.xml
+web.xml
+mvc_beans.xml
 
 # End of https://www.gitignore.io/api/java,maven,eclipse
