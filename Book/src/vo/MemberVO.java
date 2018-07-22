@@ -3,6 +3,7 @@ package vo;
 public class MemberVO {
 
 	public static void main(String[] args) {
-		System.out.println("aaaaaaaaa");
+		String a = "a";
+		System.out.println(a);
 	}
 }
