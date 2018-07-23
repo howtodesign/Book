@@ -19,19 +19,21 @@
 				<form action="join.do" method="post">
 					<fieldset>
 						<legend>join form</legend>
-						<label>ID : </label><input type="text" name="memberId" onkeyup="idDuplicate()">
-						<button id="idCheck">id check</button>
+						<label>ID : </label><input type="text" name="id" onkeyup="idDuplicate()">
 						<div id="idCheckResult"></div>
-						<label>PASSWORD : </label><input type="password" name="memberPw"><br>
-						<label>PASSWORD CHECK : </label><input type="password" name="memberPwre" onkeyup="pwCheck()"><br>
+						<label>PASSWORD : </label><input type="password" name="password"><br>
+						<label>PASSWORD CHECK : </label><input type="password" name="passwordre" onkeyup="pwCheck()"><br>
 						<div id="pwCheckResult"></div>
-						<label>NAME : </label><input type="text" name="memberName"><br>
-						<label>NICKNAME : </label><input type="text" name="memberNick" onkeyup="nickDuplicate()">
-						<button id="nickCheck">nickname check</button>
+						<label>NAME : </label><input type="text" name="name"><br>
+						<label>NICKNAME : </label><input type="text" name="nickname" onkeyup="nickDuplicate()">
 						<div id="nickCheckResult"></div><br>
-						<label>phone</label><input type="tel" name="memberPhone"><br>
-						<label>email</label><input type="email" name="memberEmail"><br>
-						<input type="submit" value="회원가입">
+						<label>phone</label><input type="tel" name="phone1" maxlength="3" onkeyup="phCheck()">-
+						<input type="tel" name="phone2" maxlength="4" onkeyup="phCheck()">-
+						<input type="tel" name="phone3" maxlength="4" onkeyup="phCheck()">
+						<input type="hidden" name="phone">
+						<br>
+						<label>email</label><input type="email" name="email"><br>
+						<input type="submit" value="join">
 					</fieldset>
 				</form>
 			</div>

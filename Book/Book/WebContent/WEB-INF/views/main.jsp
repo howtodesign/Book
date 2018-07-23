@@ -32,7 +32,7 @@
 					</form>
 				 </c:when>
 				 <c:otherwise>
-				 	${sessionScope.loginId } welcome  <a href="memberinfo.do">memberinfo</a><br>
+				 	${sessionScope.loginNick } welcome  <a href="memberInfo.do">memberinfo</a><br>
 				 	<a href="logout.do">logout</a>
 				 </c:otherwise>	
 				</c:choose>

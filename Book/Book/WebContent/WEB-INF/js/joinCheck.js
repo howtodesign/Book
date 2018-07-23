@@ -10,7 +10,7 @@
 //아이디 중복체크
 	function idDuplicate() {	
 		
-		var inputId = $("input[name='memberId']").val();
+		var inputId = $("input[name='id']").val();
 		
 		$.ajax({
 			url : "idCheck.do",
@@ -25,7 +25,7 @@
 				}else{
 					$("#idCheckResult").text("이미 존재하는 아이디 입니다.");
 					$("#idCheckResult").css("color", "red");
-					$("input[name='memberId']").focus();
+					$("input[name='id']").focus();
 					joinCheck["idCheck"] = false;
 				}
 			},
@@ -39,7 +39,7 @@
 	//닉네임 중복체크
 	function nickDuplicate() {
 		
-		var inputNick = $("input[name='memberNick']").val();
+		var inputNick = $("input[name='nickname']").val();
 		
 		$.ajax({
 			url : "nickCheck.do",
@@ -54,7 +54,7 @@
 				}else{
 					$("#nickCheckResult").text("이미 존재하는 닉네임 입니다.");
 					$("#nickCheckResult").css("color", "red");
-					$("input[name='memberNick']").focus();
+					$("input[name='nickname']").focus();
 					joinCheck["nickCheck"] = false;
 				}
 			},
@@ -67,80 +67,98 @@
 
 	//비밀번호 재확인
 	function pwCheck() {
-		if($("input[name='memberPw']").val() == $("input[name='memberPwre']").val()){
+		if($("input[name='password']").val() == $("input[name='passwordre']").val()){
 			$("#pwCheckResult").text("비밀번호가 일치합니다.");
 			$("#pwCheckResult").css("color", "green");
 		}else{
 			$("#pwCheckResult").text("비밀번호 불일치");
 			$("#pwCheckResult").css("color", "red");
 			joinCheck["pwCheck"]=false;
-			$("input[name='memberPwre']").focus();
+			$("input[name='passwordre']").focus();
 		}
 	}
+	//전화번호 
+	function phCheck() {
+		$("input[name='phone']").val($("input[name='phone1']").val() + "-" 
+				+ $("input[name='phone2']").val() + "-" + $("input[name='phone3']").val());
+	}
+	
 	
 $(function() {
 	
-	$("#idCheck").click(function() {
-		idDuplicate();
+	$("input[name='phone1']").keyup(function() {
+		if($(this).val().length==$(this).attr('maxlength')){
+			$(this).next(':input').focus();
+		}
 	})
-	
-	$("#nickCheck").click(function() {
-		nickDuplicate();
+	$("input[name='phone2']").keyup(function() {
+		if($(this).val().length==$(this).attr('maxlength')){
+			$(this).next(':input').focus();
+		}
 	})
 	
 	$("form").submit(function() {
 		
-			if($("input[name='memberId']").val() == ""){
+			if($("input[name='id']").val() == ""){
 				alert("ID를 입력하세요.");
-				$("input[name='memberId']").focus();
+				$("input[name='id']").focus();
 				return false; 
 			}else{
 					idDuplicate();
 			}
 			if(joinCheck["idCheck"]==false){
-				$("input[name='memberId']").focus();
+				$("input[name='id']").focus();
 				return false;
 			}
-			if($("input[name='memberPw']").val() == ""){
+			if($("input[name='password']").val() == ""){
 				alert("비밀번호를 입력하세요.");
-				$("input[name='memberPw']").focus();
+				$("input[name='password']").focus();
 				return false;
 			}
-			if($("input[name='memberPw']").val().length<4){
+			if($("input[name='password']").val().length<4){
 				alert("비밀번호가 너무 짧습니다.");
-				$("input[name='memberPw']").focus();
+				$("input[name='password']").focus();
 				return false;
 			}else{
 				joinCheck["pwCheck"]=true;
 			}
-			if($("input[name='memberName']").val()==""){
+			if($("input[name='name']").val()==""){
 				alert("이름 입력");
-				$("input[name='memberName']").focus();
+				$("input[name='name']").focus();
 				return false;
 			}else{
 				joinCheck["nameCheck"]=true;
 			}
-			if($("input[name='memberNick']").val()==""){
+			if($("input[name='nickname']").val()==""){
 				alert("닉네임 입력");
-				$("input[name='memberNick']").focus();
+				$("input[name='nickname']").focus();
 				return false;
 			}else{
 					nickDuplicate();
 			}
 			if(joinCheck["nickCheck"]==false){
-				$("input[name='memberNick']").focus();
+				$("input[name='nickname']").focus();
 				return false;
 			}
-			if($("input[name='memberPhone']").val()==""){
+			if($("input[name='phone']").val()=="--"){
 				alert("번호 입력");
-				$("input[name='memberPhone']").focus();
+				$("input[name='phone1']").focus();
 				return false;
+			}else if(isNaN($("input[name='phone1']").val()) || isNaN($("input[name='phone2']").val()) 
+					   ||isNaN($("input[name='phone3']").val())) {
+				  joinCheck["phoneCheck"]=false;
+				  alert("숫자만 입력");
+				  return false;
+			}else if ($("input[name='phone']").val().length != 13) {
+				   joinCheck["phoneCheck"]=false;
+				   alert("전화번호 확인");
+				   return false;
 			}else{
-				joinCheck["phoneCheck"]=true;
+				   joinCheck["phoneCheck"]=true;
 			}
-			if($("input[name='memberEmail']").val()==""){
+			if($("input[name='email']").val()==""){
 				alert("이메일 입력");
-				$("input[name='memberEmail']").focus();
+				$("input[name='email']").focus();
 				return false;
 			}else{
 				joinCheck["emailCheck"]=true;
@@ -148,6 +166,8 @@ $(function() {
 			if(joinCheck["idCheck"]&&joinCheck["pwCheck"]&&joinCheck["nameCheck"]
 			&&joinCheck["nickCheck"] && joinCheck["phoneCheck"] && joinCheck["emailCheck"]){
 				return true;
+			}else{
+				alert("작성내용을 다시 확인해주세요.");
 			}
 		})
 })

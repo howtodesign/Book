@@ -30,7 +30,7 @@ public class MemberDAO {
 	
 	public String getPassbyId(String id){
 		MemberMapper mapper = template.getMapper(MemberMapper.class);
-		return mapper.getNickbyId(id);
+		return mapper.getPassbyId(id);
 	}
 	
 	public String getNickbyId(String id){

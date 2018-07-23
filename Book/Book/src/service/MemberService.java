@@ -51,4 +51,19 @@ public class MemberService {
 	public String checkNick(String nickname){
 		return dao.confirmNick(nickname);
 	}
+	
+	// 로그인 ID PW 확인
+	public boolean loginCheck(String userId, String userPw) {
+			String passwd = dao.getPassbyId(userId);
+			if(passwd != null && userPw.equals(passwd) ) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+	
+	// 회원정보 가져오기
+	public MemberVO getMember(String id) {
+		return dao.selectMem(id);
+	}
 }
