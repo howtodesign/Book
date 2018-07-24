@@ -43,6 +43,16 @@ public class MemberDAO {
 		return mapper.cofirmNick(nickname);
 	}
 	
+	public int updatePassword(String id, String password){
+		MemberMapper mapper = template.getMapper(MemberMapper.class);
+		return mapper.updatePassword(id, password);
+	}
+	
+	public int deleteMem(String id){
+		MemberMapper mapper = template.getMapper(MemberMapper.class);
+		return mapper.deleteMem(id);
+	}
+	
 	public int grantAdmin(String id, String flagAdmin){
 		MemberMapper mapper = template.getMapper(MemberMapper.class);
 		return mapper.grantAdmin(id, flagAdmin);

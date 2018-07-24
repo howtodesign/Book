@@ -29,6 +29,7 @@ public class MemberService {
 	
 	//	업데이트
 	public boolean updateValidator(MemberVO member) {
+		member.setPassword(dao.getPassbyId(member.getId()));
 		if( member.getId()==null || member.getId()=="" ||
 			member.getPassword()==null || member.getPassword()=="" ||
 			member.getName()==null || member.getName()=="" ||
@@ -65,5 +66,15 @@ public class MemberService {
 	// 회원정보 가져오기
 	public MemberVO getMember(String id) {
 		return dao.selectMem(id);
+	}
+	
+	// 비밀번호 변경
+	public int updatePassword(String id, String password){
+		return dao.updatePassword(id, password);
+	}
+	
+	//회원 탈퇴
+	public int deleteMember(String id){
+		return dao.deleteMem(id);
 	}
 }

@@ -88,5 +88,60 @@ public class MemberController {
 	    }   
 	}
 	
+	@RequestMapping("/updateMember.do")
+	public ModelAndView updateProc(MemberVO member, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+			if(service.updateValidator(member)) {
+				mv.addObject("checkup", "success");
+				mv.setViewName("member_info");
+			}else {
+				mv.setViewName("update_fail");
+			}
+		return mv;		
+	}
 	
+	@RequestMapping("updatePasswordForm.do")
+	public String updatePasswordForm(){
+		return "update_password_form";
+	}
+	
+	@RequestMapping("updatePassword.do")
+	public String updatePassword(String beforepassword, String password, String passwordre, HttpSession session){
+		String id = (String)session.getAttribute("loginId");
+		if(service.loginCheck(id, beforepassword)){
+			if(password.equals(passwordre)){
+				if(service.updatePassword(id, password)>0){
+					session.invalidate();
+					return "update_success";
+				}else{
+					return "update_fail";
+				}
+			}else{
+				return "update_fail";
+			}
+		}else{
+			return "update_fail";
+		}
+	}
+	
+	@RequestMapping("deleteMemberForm.do")
+	public String deleteMemberForm(){
+		return "delete_member_form";
+	}
+	
+	@RequestMapping("deleteMember.do")
+	public String deleteMember(String password, String passwordre, HttpSession session){
+		String id = (String)session.getAttribute("loginId");
+		if(service.loginCheck(id, password)){
+			if(password.equals(passwordre)){
+				service.deleteMember(id);
+				session.invalidate();
+				return "delete_success";
+			}else{
+				return "delete_fail";
+			}
+		}else{
+			return "delete_fail";
+		}
+	}
 }

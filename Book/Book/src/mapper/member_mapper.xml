@@ -34,7 +34,20 @@
 		SELECT NICKNAME FROM MEMBER WHERE NICKNAME=#{nickname}
 	</select>
 	
-	<update id="grantAdmin" parameterType="MemberVO">
+	<update id="updatePassword">
+		UPDATE MEMBER
+		SET 
+			PASSWORD=#{password}
+		WHERE
+			ID=#{id}	
+	</update>
+	
+	<delete id="deleteMem" parameterType="String">
+		DELETE FROM MEMBER
+		WHERE ID=#{id}
+	</delete>
+	
+	<update id="grantAdmin">
 		UPDATE MEMBER
 		SET
 			FLAG_ADMIN=#{flagAdmin}

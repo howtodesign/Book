@@ -1,5 +1,7 @@
 package mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import vo.MemberVO;
 
 public interface MemberMapper {
@@ -12,6 +14,8 @@ public interface MemberMapper {
 	public String getNickbyId(String id); // 닉네임 가져오기
 	public String cofirmNick(String nickname); // 닉네임 유효성 체크
 	
-	public int grantAdmin(String id, String flagAdmin); // 회원 권한 설정
+	public int updatePassword(@Param("id")String id, @Param("password")String password); // 비밀번호만 변경
+	public int deleteMem(String id); // 회원 탈퇴
+	public int grantAdmin(@Param("id")String id, @Param("flagAdmin")String flagAdmin); // 회원 권한 설정
 	
 }

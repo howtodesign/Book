@@ -22,10 +22,10 @@
 				 		<table>
 				 			<tr>
 				 				<td><input type="text" name="userId" placeholder="ID"></td>
-				 				<td rowspan="2"><input type="submit" value="login"><td>
 				 			</tr>
 				 			<tr>
 				 				<td><input type="password" name="userPw" placeholder="Password" >
+				 				<td rowspan="2"><input type="submit" value="login"><td>
 				 			</tr>
 				 		</table>
 				 		<a href="joinForm.do">join</a>  <a>search id/pass</a>

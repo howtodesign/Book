@@ -81,6 +81,11 @@ function nickDuplicate() {
 			history.go(-2);
 		</script>
 	</c:if>
+	<c:if test="${checkup eq 'success' }">
+		<script type="text/javascript">
+		alert("update complete");
+		</script>
+	</c:if>
 	<header>
 		<h1 class="gradient">Book Review</h1>
 		<h5>dreamING of breaking away from the routine of daily life</h5>
@@ -109,7 +114,8 @@ function nickDuplicate() {
 					</fieldset>
 				</form>
 				<button id="updatebtn">modify</button>  
-				<a href="updatePassword.do"><button>update password</button></a>
+				<a href="updatePasswordForm.do"><button>update password</button></a>
+				<a href="deleteMemberForm.do"><button>get out of here</button></a>
 				<a href="${pageContext.request.contextPath}">main</a>
 			</div>
 		</article>
