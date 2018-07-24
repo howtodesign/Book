@@ -50,7 +50,7 @@
 	<update id="grantAdmin">
 		UPDATE MEMBER
 		SET
-			FLAG_ADMIN=#{flagAdmin}
+			FLAG_ADMIN=#{flag_admin}
 		WHERE
 			ID = #{id}
 	</update>
@@ -62,7 +62,7 @@
 		<result column="NICKNAME" property="nickname"/>
 		<result column="PHONE" property="phone"/>
 		<result column="EMAIL" property="email"/>
-		<result column="REGIST_DATE" property="registDate"/>
-		<result column="FLAG_ADMIN" property="flagAdmin"/>
+		<result column="REGIST_DATE" property="regist_date"/>
+		<result column="FLAG_ADMIN" property="flag_admin"/>
 	</resultMap>
 </mapper>

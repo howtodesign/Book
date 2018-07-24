@@ -9,21 +9,21 @@ public class MemberVO {
 	private String nickname;
 	private String phone;
 	private String email;
-	private String registDate;
-	private String flagAdmin;
+	private String regist_date;
+	private String flag_admin;
 	
 	public MemberVO() { }
 
 	public MemberVO(String id, String password, String name, String nickname, String phone, String email,
-			String registDate, String flagAdmin) {
+			String regist_date, String flag_admin) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.nickname = nickname;
 		this.phone = phone;
 		this.email = email;
-		this.registDate = registDate;
-		this.flagAdmin = flagAdmin;
+		this.regist_date = regist_date;
+		this.flag_admin = flag_admin;
 	}
 
 	public String getId() {
@@ -74,20 +74,20 @@ public class MemberVO {
 		this.email = email;
 	}
 
-	public String getregistDate() {
-		return registDate;
+	public String getregist_date() {
+		return regist_date;
 	}
 
-	public void setregistDate(String registDate) {
-		this.registDate = registDate;
+	public void setregist_date(String regist_date) {
+		this.regist_date = regist_date;
 	}
 
-	public String getflagAdmin() {
-		return flagAdmin;
+	public String getflag_admin() {
+		return flag_admin;
 	}
 
-	public void setflagAdmin(String flagAdmin) {
-		this.flagAdmin = flagAdmin;
+	public void setflag_admin(String flag_admin) {
+		this.flag_admin = flag_admin;
 	}
 	
 	
