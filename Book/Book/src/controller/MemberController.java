@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,42 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberInfo.do")
-	public String memberInfo() {
-		return "member_info";
+	public ModelAndView memberInfo(String userPw, HttpSession session) {
+		
+		ModelAndView mv = new ModelAndView();
+		if(service.loginCheck((String)session.getAttribute("loginId"), userPw)) {
+			mv.setViewName("member_info");
+		}else {
+			mv.addObject("checkpw", "getout");
+			mv.setViewName("member_info");
+		}
+		return mv;
+	}
+	
+	@RequestMapping("/getMember.do")
+	@ResponseBody
+	public void getMember(String id, HttpServletResponse response){
+
+		String memberJson;
+
+	    MemberVO member = service.getMember(id);
+	    if(member != null){
+	        memberJson = "{\"id\":\""+member.getId()
+	                    +"\",\"name\":\""+member.getName()
+	                    +"\",\"password\":\""+member.getPassword()
+	                    +"\",\"phone\":\""+member.getPhone()
+	                    +"\",\"nickname\":\""+member.getNickname()
+	                    +"\",\"regitsDate\":\""+member.getregistDate()
+	                    +"\",\"adminFlag\":\""+member.getflagAdmin()
+	                    +"\",\"email\":\""+member.getEmail()+"\"}";
+	    }
+	    else{
+	        memberJson = "null";
+	    }
+	    try {
+	        response.getWriter().print(memberJson);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }   
 	}
 }

@@ -10,4 +10,9 @@ public class MainController {
 	public String main(){
 		return "main";
 	}
+	
+	@RequestMapping("/checkPassword.do")
+	public String memberInfo() {
+		return "check_password";
+	}
 }

@@ -5,11 +5,82 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script type="text/javascript" src="resource/member_info.js"></script>
+<script type="text/javascript" src="resource/member_update.js"></script>
+<script type="text/javascript">
+//닉네임 중복체크
+function nickDuplicate() {
+	
+	var inputNick = $("input[name='nickname']").val();
+	var userNick = "${sessionScope['loginNick']}";
+	$.ajax({
+		url : "nickCheck.do",
+		method : "post",
+		data : {nick : inputNick}, 
+		datatype : "html",
+		success : function(result) {
+			if(result=="true" || inputNick==userNick){
+				$("#nickCheckResult").text("사용 가능한 닉네임 입니다.");
+				$("#nickCheckResult").css("color", "green");
+				joinCheck["nickCheck"] = true;
+			}else{
+				$("#nickCheckResult").text("이미 존재하는 닉네임 입니다.");
+				$("#nickCheckResult").css("color", "red");
+				$("input[name='nickname']").focus();
+				joinCheck["nickCheck"] = false;
+			}
+		},
+		error : function(ex) {
+			alert(ex);
+		}
+	})
+	
+};	
+
+	$(function() {
+		var userId = "${sessionScope['loginId']}";
+		$.ajax({
+			url : "getMember.do",
+			method : "post",
+			data : {id : userId}, 
+			datatype : "text",
+			success : function(result) {
+				if(result != "null"){
+				var member = JSON.parse(result);
+				$("input[name='name']").attr("value", member.name);
+				$("input[name='nickname']").attr("value", member.nickname);
+				$("input[name='email']").attr("value", member.email);
+				$("input[name='phone']").attr("value", member.phone);
+				$("input[name='phone1']").attr("value", member.phone.substring(0, 3));
+				$("input[name='phone2']").attr("value", member.phone.substring(4, 8));
+				$("input[name='phone3']").attr("value", member.phone.substring(9, 13));
+				}else{
+					alert("정보가 없습니다.");
+				}
+			},
+			error : function(ex) {
+				alert(ex);
+			}
+			
+		})
+		
+		$("#updatebtn").click(function() {
+			$("input[readonly='readonly']").prop("readonly", false);
+			$("#updatebtn").hide();
+			$("input[type='submit']").show();
+			return false;
+		})
+	})
+</script>
 <title>member info</title>
 <link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
 <body>
+	<c:if test="${checkpw eq 'getout' }">
+		<script type="text/javascript">
+			alert("비밀번호가 틀렸습니다.");
+			history.go(-2);
+		</script>
+	</c:if>
 	<header>
 		<h1 class="gradient">Book Review</h1>
 		<h5>dreamING of breaking away from the routine of daily life</h5>
@@ -21,23 +92,24 @@
 				<form action="updateMember.do" method="post">
 					<fieldset>
 						<legend>member info</legend>
-						<label>ID : </label>${sessionScope.loginId }
+						<label>ID : </label>${sessionScope.loginId }<br>
 						<input type="hidden" name="id" value="${sessionScope.loginId }">
-						<label>NAME : </label><input readonly="readonly" type="text" name="name" value="${member.name }"><br>
+						<label>NAME : </label><input readonly="readonly" type="text" name="name"><br>
 						<label>NICKNAME : </label>
-						<input readonly="readonly" type="text" name="nickname" value="${member.nickname }" onkeyup="nickDuplicate()">
+						<input readonly="readonly" type="text" name="nickname"onkeyup="nickDuplicate()">
 						<div id="nickCheckResult"></div><br>
-						<c:set var="phones" value="${member.phone }"/>
-						<label>phone</label><input readonly="readonly" type="tel" name="phone1" value="${fn:substring(phones, 0, 3) }" maxlength="3" onkeyup="phCheck()">-
-						<input readonly="readonly" type="tel" name="phone2" value="${fn:substring(phones, 4, 8) }" maxlength="4" onkeyup="phCheck()">-
-						<input readonly="readonly" type="tel" name="phone3" value="${fn:substring(phones, 9, 13) }" maxlength="4" onkeyup="phCheck()">
+						<c:set var="phones"/>
+						<label>phone</label><input readonly="readonly" type="tel" name="phone1" maxlength="3" onkeyup="phCheck()">-
+						<input readonly="readonly" type="tel" name="phone2" maxlength="4" onkeyup="phCheck()">-
+						<input readonly="readonly" type="tel" name="phone3" maxlength="4" onkeyup="phCheck()">
 						<input type="hidden" name="phone">
 						<br>
-						<label>email</label><input readonly="readonly" type="email" name="email" value="${member.email }"><br>
-						<button id="updatebtn">수정하기</button>  
+						<label>email</label><input readonly="readonly" type="email" name="email" ><br>
+						<input type="submit" value="수정하기" hidden="">
 					</fieldset>
-					<a href="updatePassword.do"><button>비밀번호 변경</button></a>
 				</form>
+				<button id="updatebtn">수정하기</button>  
+				<a href="updatePassword.do"><button>비밀번호 변경</button></a>
 			</div>
 		</article>
 	</section>
