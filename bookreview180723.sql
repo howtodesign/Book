@@ -9,9 +9,9 @@ email varchar2(30) not null,
 regist_date date default sysdate,
 flag_admin varchar2(7) default 'm'
 );
--- ÃÖÃÊ °ü¸®ÀÚ Ãß°¡
+-- ìµœì´ˆ ê´€ë¦¬ì ì¶”ê°€
 insert into member values(
-'admin1', '1234', '°ü¸®ÀÚ', '°ü¸®ÀÚ', '010-3333-3333', 'admin1@google.com' ,sysdate, 'admin13'
+'admin1', '1234', 'ê´€ë¦¬ì', 'ê´€ë¦¬ì', '010-3333-3333', 'admin1@google.com' ,sysdate, 'admin13'
 );
 
 
@@ -20,10 +20,10 @@ create table board_code(
 board_code varchar2(10) primary key,
 board_name varchar2(20) not null unique
 );
--- board category ÀÔ·Â
-insert into board_code values('b1001', 'Ã¥');
-insert into board_code values('b1002', '¿µÈ­');
-insert into board_code values('b1003', '¹ÂÁ÷');
+-- board category ì…ë ¥
+insert into board_code values('b1001', 'ì±…');
+insert into board_code values('b1002', 'ì˜í™”');
+insert into board_code values('b1003', 'ë®¤ì§');
 
 
 -- book_code table
@@ -31,18 +31,18 @@ create table book_code(
 bb_code varchar2(10) primary key,
 bb_name varchar2(20) not null unique
 );
--- book category ÀÔ·Â
-insert into book_code values('bb101', 'Á¾ÇÕ');
-insert into book_code values('bb102', '¼Ò¼³');
-insert into book_code values('bb103', '½Ã/¿¡¼¼ÀÌ');
-insert into book_code values('bb104', '°æÁ¦/°æ¿µ');
-insert into book_code values('bb105', 'ÀÚ±â°è¹ß');
-insert into book_code values('bb106', '¾Æµ¿');
-insert into book_code values('bb107', 'À¯¾Æ');
-insert into book_code values('bb108', 'ÀÎ¹®');
-insert into book_code values('bb109', '¿ª»ç/¹®È­');
-insert into book_code values('bb110', '¿Ü±¹¾î');
-insert into book_code values('bb111', '°¡Á¤/»ıÈ°');
+-- book category ì…ë ¥
+insert into book_code values('bb101', 'ì¢…í•©');
+insert into book_code values('bb102', 'ì†Œì„¤');
+insert into book_code values('bb103', 'ì‹œ/ì—ì„¸ì´');
+insert into book_code values('bb104', 'ê²½ì œ/ê²½ì˜');
+insert into book_code values('bb105', 'ìê¸°ê³„ë°œ');
+insert into book_code values('bb106', 'ì•„ë™');
+insert into book_code values('bb107', 'ìœ ì•„');
+insert into book_code values('bb108', 'ì¸ë¬¸');
+insert into book_code values('bb109', 'ì—­ì‚¬/ë¬¸í™”');
+insert into book_code values('bb110', 'ì™¸êµ­ì–´');
+insert into book_code values('bb111', 'ê°€ì •/ìƒí™œ');
 
 
 -- book_board table
@@ -60,8 +60,8 @@ bookb_level number(11) default 0,
 readcount number(11) default 0,
 recommend number(11) default 0,
 opposite number(11) default 0,
-constraint fk_bb_writer foreign key(writer) references member(nickname),
-constraint fk_bb_code foreign key(bb_code) references book_code(bb_code)
+constraint fk_bb_writer foreign key(writer) references member(nickname) on delete cascade,
+constraint fk_bb_code foreign key(bb_code) references book_code(bb_code) on delete cascade
 );
 -- book_board_seq
 create sequence book_board_seq
@@ -81,8 +81,8 @@ readcount number(11) default 0,
 recommend number(11) default 0,
 opposite number(11) default 0,
 flag_lock number(1) default 0,
-constraint fk_bc_writer foreign key(writer) references member(nickname),
-constraint fk_ref_bb_num foreign key(ref_num) references book_board(bookb_num)
+constraint fk_bc_writer foreign key(writer) references member(nickname) on delete cascade,
+constraint fk_ref_bb_num foreign key(ref_num) references book_board(bookb_num) on delete cascade
 );
 -- book_comment seq
 create sequence book_comment_seq
