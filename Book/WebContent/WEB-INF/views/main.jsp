@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-<<<<<<< HEAD
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -9,42 +8,6 @@
 <link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
 <body>
-=======
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE>
-<html>
-<head>
-<meta charset=UTF-8">
-<title></title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript">
-	 $(function() {
-		 $(".genre").on("click",function(){
-			 var selectedGenre = $(this).attr('value'); 
-			
-			 if(selectedGenre=="horror"){
-				 var bb_code =$(this).attr('id');
-			
-			 window.location.href = "horror.do?bb_code="+bb_code;
-			 }
-			 
-			 
-			 })
-		 
-		 
-		 
-	 })
-	
-	</script>
-	
-<link href="css/style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-
->>>>>>> jyh
 	<header>
 		<h1 class="gradient">Book Review</h1>
 		<h5>dreamING of breaking away from the routine of daily life</h5>
