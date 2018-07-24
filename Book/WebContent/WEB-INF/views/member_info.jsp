@@ -53,6 +53,7 @@ function nickDuplicate() {
 				$("input[name='phone1']").attr("value", member.phone.substring(0, 3));
 				$("input[name='phone2']").attr("value", member.phone.substring(4, 8));
 				$("input[name='phone3']").attr("value", member.phone.substring(9, 13));
+				$("#regist_date").text(member.regist_date);
 				}else{
 					alert("정보가 없습니다.");
 				}
@@ -99,6 +100,7 @@ function nickDuplicate() {
 						<legend>member info</legend>
 						<label>ID : </label>${sessionScope.loginId }<br>
 						<input type="hidden" name="id" value="${sessionScope.loginId }">
+						<label>REGIST_DATE : </label><span id="regist_date"></span><br>
 						<label>NAME : </label><input readonly="readonly" type="text" name="name"><br>
 						<label>NICKNAME : </label>
 						<input readonly="readonly" type="text" name="nickname"onkeyup="nickDuplicate()">
