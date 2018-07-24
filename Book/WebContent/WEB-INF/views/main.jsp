@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -8,6 +9,42 @@
 <link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
 <body>
+=======
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE>
+<html>
+<head>
+<meta charset=UTF-8">
+<title></title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	 $(function() {
+		 $(".genre").on("click",function(){
+			 var selectedGenre = $(this).attr('value'); 
+			
+			 if(selectedGenre=="horror"){
+				 var bb_code =$(this).attr('id');
+			
+			 window.location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 
+			 
+			 })
+		 
+		 
+		 
+	 })
+	
+	</script>
+	
+<link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+>>>>>>> jyh
 	<header>
 		<h1 class="gradient">Book Review</h1>
 		<h5>dreamING of breaking away from the routine of daily life</h5>
@@ -15,6 +52,7 @@
 
 	<section>
 		<div class="col_3 sidebar">
+<<<<<<< HEAD
 			<div class="loginStation">
 				<c:choose>
 				 <c:when test="${empty sessionScope.loginId }">
@@ -43,6 +81,15 @@
 				<li>ROMANCE</li>
 				<li>COOK</li>
 				<li>TRAVEL</li>
+=======
+			<div class="loginStation"></div>
+
+			<ul>
+				<li id="bb101" value="horror" class="genre">HORROR</li>
+				<li id="romance" value="romance" class="genre">ROMANCE</li>
+				<li id="cook" value="cook" class="genre">COOK</li>
+				<li id="travel" value="travel" class="genre">TRAVEL</li>
+>>>>>>> jyh
 
 			</ul>
 		</div>
@@ -60,5 +107,9 @@
 	<footer>
 		<p>Footer</p>
 	</footer>
+<<<<<<< HEAD
+=======
+
+>>>>>>> jyh
 </body>
 </html>
