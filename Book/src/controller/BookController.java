@@ -33,10 +33,7 @@ public class BookController {
 	@Autowired
 	private FileDAO dao;
 	
-	@RequestMapping("/main.do")
-	public String mainPage() {
-		return "main";
-	}
+	
 	
 	@RequestMapping("/horror.do")
 	public ModelAndView HorrorPage(@RequestParam(defaultValue="1")int p,String bb_code, HttpSession session) {
