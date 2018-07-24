@@ -77,7 +77,7 @@ function nickDuplicate() {
 <body>
 	<c:if test="${checkpw eq 'getout' }">
 		<script type="text/javascript">
-			alert("비밀번호가 틀렸습니다.");
+			alert("dismatched password");
 			history.go(-2);
 		</script>
 	</c:if>
@@ -105,11 +105,12 @@ function nickDuplicate() {
 						<input type="hidden" name="phone">
 						<br>
 						<label>email</label><input readonly="readonly" type="email" name="email" ><br>
-						<input type="submit" value="수정하기" hidden="">
+						<input type="submit" value="modify" hidden="">
 					</fieldset>
 				</form>
-				<button id="updatebtn">수정하기</button>  
-				<a href="updatePassword.do"><button>비밀번호 변경</button></a>
+				<button id="updatebtn">modify</button>  
+				<a href="updatePassword.do"><button>update password</button></a>
+				<a href="${pageContext.request.contextPath}">main</a>
 			</div>
 		</article>
 	</section>

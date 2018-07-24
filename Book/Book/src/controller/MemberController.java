@@ -18,11 +18,6 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	@RequestMapping("/joinForm.do") // go to joinPage
-	public String joinForm() {
-		return "join_form";
-	}
-	
 	@RequestMapping("/idCheck.do") // id check
 	@ResponseBody
 	public String idCheck(String id) {
@@ -52,24 +47,6 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping("/login.do") // login
-	public ModelAndView loginProc(String userId, String userPw, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		if(service.loginCheck(userId, userPw)) {
-			session.setAttribute("loginId", userId);
-			session.setAttribute("loginNick", service.getNickname(userId));
-			mv.setViewName("login_success");
-		}else {
-			mv.setViewName("login_fail");
-		}
-		return mv;
-	}
-	
-	@RequestMapping("/logout.do") // logout
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "logout";
-	}
 	
 	@RequestMapping("/memberInfo.do")
 	public ModelAndView memberInfo(String userPw, HttpSession session) {
@@ -110,4 +87,6 @@ public class MemberController {
 	        e.printStackTrace();
 	    }   
 	}
+	
+	
 }
