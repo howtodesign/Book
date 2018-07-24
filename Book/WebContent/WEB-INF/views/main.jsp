@@ -15,7 +15,6 @@
 
 	<section>
 		<div class="col_3 sidebar">
-<<<<<<< HEAD
 			<div class="loginStation">
 				<c:choose>
 				 <c:when test="${empty sessionScope.loginId }">
@@ -44,16 +43,6 @@
 				<li>ROMANCE</li>
 				<li>COOK</li>
 				<li>TRAVEL</li>
-=======
-			<div class="loginStation"></div>
-
-			<ul>
-				<li id="bb101" value="horror" class="genre">HORROR</li>
-				<li id="romance" value="romance" class="genre">ROMANCE</li>
-				<li id="cook" value="cook" class="genre">COOK</li>
-				<li id="travel" value="travel" class="genre">TRAVEL</li>
->>>>>>> jyh
-
 			</ul>
 		</div>
 		<article class="col_9">
@@ -70,9 +59,5 @@
 	<footer>
 		<p>Footer</p>
 	</footer>
-<<<<<<< HEAD
-=======
-
->>>>>>> jyh
 </body>
 </html>
