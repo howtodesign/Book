@@ -1,0 +1,70 @@
+package service;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import repository.BookBoardDAO;
+import vo.BookBoardPageVO;
+import vo.BookBoardVO;
+
+
+@Component
+public class BookBoardService {
+
+	@Autowired
+	private BookBoardDAO bookBoardDAO;
+	
+	public BookBoardPageVO makePage(int currentPage, String bb_code) {
+		final int PAGE_PER_COUNT = 10;
+		final int PAGE_PER_BLOCK=10;
+		int totalBoardCount = bookBoardDAO.selectBookBoardCount(bb_code);	
+		int totalPage= totalBoardCount / PAGE_PER_COUNT;
+		if (totalBoardCount % PAGE_PER_COUNT != 0) {
+			totalPage++;
+		}
+		//WHAT IS THIS MEANS...? BOARD BOARD NUM ...../
+		int number = totalBoardCount-(currentPage-1)*PAGE_PER_COUNT;
+		
+		
+		int startRow = (currentPage - 1) * PAGE_PER_BLOCK+1;
+		int endRow= currentPage* PAGE_PER_BLOCK ;
+		List<BookBoardVO> bookBoardList = bookBoardDAO.selectBookBoardOnOnePage(startRow, endRow, bb_code);
+		
+		int startPage = (currentPage-1)/PAGE_PER_BLOCK*PAGE_PER_BLOCK+1;
+		int endPage = startPage + PAGE_PER_BLOCK-1;
+		if (endPage > totalPage) {
+			endPage = totalPage;
+		}
+
+		return new BookBoardPageVO(bookBoardList, startPage, endPage, totalPage, currentPage, number);
+	}
+
+	public int insertedBoardNum(BookBoardVO vo, HttpServletRequest request) {
+		vo.setReadcount(0);
+		// 조회수를 영으로 세팅하고, 인서트를 시킴
+		String bb_code= request.getParameter("bb_code");
+		vo.setBb_code(bb_code);
+		bookBoardDAO.insertBoard(vo);
+
+		return vo.getBookb_num();
+	}
+
+	public BookBoardVO readWithoutCount(int bookb_num) {
+		return bookBoardDAO.selectBoard(bookb_num);
+	}
+
+	public BookBoardVO readWithReadCount(int bookb_num) {
+		// 조회수 증가를 먼저 시킴
+		if (bookBoardDAO.newReadCount(bookb_num) > 0) {
+			// 글이 있다면 조회수가 증가할 것이고 그 다음에 글을 불러온다.
+			return bookBoardDAO.selectBoard(bookb_num);
+		} else {
+			return null;
+		}
+	}
+	
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BookBoardMapper">
+
+<insert id="insertBoard" parameterType="BookBoardVO">
+insert into member(bookb_num, writer, title, book_name, bb_code, content, write_date)
+values(book_board_seq.nextval, #{writer}, #{title}, #{book_name}, #{bb_code}, #{content}, sysdate)
+<selectKey order="AFTER" keyProperty="bookb_num" resultType="int">
+			select book_board_seq.currval from dual
+		</selectKey>
+</insert>
+
+<select id="selectBoard" resultMap="result">
+
+select * from book_board where bookb_num=#{bookb_num}
+</select>
+
+<select id="selectBookBoardCount" resultType="int">
+select count(*) from book_board where bb_code=#{bb_code}
+</select>
+
+<select id="selectBookBoardList" resultMap="result">
+select bookb_num, writer, title, book_name, bb_code, content, write_date, bookb_ref, bookb_seq, bookb_level, readcount, recomment, opposite
+from book_board order by bookb_num desc where bb_code=#{bb_code}
+</select> 
+
+<select id="selectBookBoardOnOnePage" resultMap="result">
+select bookb_num, writer, title, content, readcount, to_char(sysdate, 'yyyy-mm-dd hh:mm:ss') as write_date 
+from(
+   select rownum as rnum, bookb_num, writer, title, content, readcount, write_date 
+   from (
+		select * from book_board order by bookb_num desc
+			)
+		)where rnum&gt;=#{startRow} and rnum&lt;=#{viewRow}
+</select>
+
+<update id="newReadCount">
+update book_board set readcount=readcount+1
+		where bookb_num=#{bookb_num}
+</update>
+
+<resultMap type="BookBoardVO" id="result">
+<result column="bookb_num" property="bookb_num"/>
+<result column="writer" property="writer"/>
+<result column="title" property="title"/>
+<result column="book_name" property="book_name"/>
+<result column="bb_code" property="bb_code"/>
+<result column="content" property="content"/>
+<result column="write_date" property="write_date"/>
+
+<result column="bookb_ref" property="bookb_ref"/>
+<result column="bookb_seq" property="bookb_seq"/>
+<result column="bookb_level" property="bookb_level"/>
+<result column="readcount" property="readcount"/>
+<result column="recommend" property="recommend"/>
+<result column="opposite" property="opposite"/>
+</resultMap>
+
+
+</mapper>

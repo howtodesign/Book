@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.FileMapper">
+
+<insert id="insertFile" parameterType="FileVO">
+insert into file_tb(file_num, original_name, saved_path, bookb_num, bb_code)
+		values(file_tb_seq.nextval, #{original_name}, #{saved_path}, #{bookb_num}, #{bb_code})
+</insert>
+
+<select id="selectAll" resultMap="result">
+select * from file_tb where bookb_num=#{bookb_num}
+</select>
+
+<resultMap type="FileVO" id="result">
+		<result column="file_num" property="file_num" />
+		<result column="original_name" property="original_name" />
+		<result column="real_path" property="real_path" />
+		<result column="bookb_num" property="bookb_num" />
+		<result column="bb_code" property="bb_code" />
+</resultMap>
+
+
+</mapper>
