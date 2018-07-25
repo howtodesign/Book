@@ -74,8 +74,8 @@ public class MemberController {
 	                    +"\",\"password\":\""+member.getPassword()
 	                    +"\",\"phone\":\""+member.getPhone()
 	                    +"\",\"nickname\":\""+member.getNickname()
-	                    +"\",\"regist_date\":\""+member.getregist_date()
-	                    +"\",\"admin_flag\":\""+member.getflag_admin()
+	                    +"\",\"regist_date\":\""+member.getRegist_date()
+	                    +"\",\"admin_flag\":\""+member.getFlag_admin()
 	                    +"\",\"email\":\""+member.getEmail()+"\"}";
 	    }
 	    else{

@@ -75,21 +75,21 @@ public class MemberVO {
 		this.email = email;
 	}
 
-	public String getregist_date() {
+	public String getRegist_date() {
 		return regist_date;
 	}
 
-	public void setregist_date(String regist_date) {
+	public void setRegist_date(String regist_date) {
 		this.regist_date = regist_date;
 	}
 
-	public String getflag_admin() {
+	public String getFlag_admin() {
 		return flag_admin;
 	}
 
-	public void setflag_admin(String flag_admin) {
+	public void setFlag_admin(String flag_admin) {
 		this.flag_admin = flag_admin;
 	}
-	
+
 	
 }
