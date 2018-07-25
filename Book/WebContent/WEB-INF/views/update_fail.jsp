@@ -1,22 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE>
 <html>
 <head>
-<meta charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title></title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
 <body>
-<script type="text/javascript">
-
+	<script type="text/javascript">
 		alert("update fail");
-
 		location.href="${pageContext.request.contextPath}";
-
 	</script>
 </body>
 </html>

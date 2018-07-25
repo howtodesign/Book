@@ -1,17 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE>
 <html>
 <head>
-<meta charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title></title>
+<<<<<<< HEAD
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link href="css/style.css" rel="stylesheet" type="text/css">
+=======
+<link type="text/css" rel="stylesheet" href="resource/style.css">
+>>>>>>> refs/remotes/origin/dev
 </head>
 <body>
+<<<<<<< HEAD
 <header>
+=======
+	<header>
+		<h1 class="gradient">Book Review</h1>
+		<h5>dreamING of breaking away from the routine of daily life</h5>
+	</header>
+>>>>>>> refs/remotes/origin/dev
 
+<<<<<<< HEAD
 		<h1 class="gradient">Book Review</h1>
 
 		<h5>dreamING of breaking away from the routine of daily life</h5>
@@ -45,5 +56,20 @@
 		<p>Footer</p>
 
 	</footer>
+=======
+	<section>
+		<article class="col_9">
+			<div>
+				<h2>fail to join</h2>
+				<a href="joinForm.do">join</a>
+				<a href="${pageContext.request.contextPath}">main</a>
+			</div>
+		</article>
+	</section>
+
+	<footer>
+		<p>Footer</p>
+	</footer>
+>>>>>>> refs/remotes/origin/dev
 </body>
 </html>
