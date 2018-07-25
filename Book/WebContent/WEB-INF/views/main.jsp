@@ -1,9 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		
+		 $(".genre").click(function(){
+			 var selectedGenre = $(this).attr('value'); 
+			
+			 if(selectedGenre=="horror"){
+				 var bb_code =$(this).attr('id');
+			
+			 location.href = "${pageContext.request.contextPath}/horror.do?bb_code="+bb_code;
+			 }
+			 
+			 return false;
+			 });	 
+	})
+</script>
 <title>This is mainpage</title>
 <link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
@@ -39,10 +56,10 @@
 			</div>
 
 			<ul>
-				<li>HORROR</li>
-				<li>ROMANCE</li>
-				<li>COOK</li>
-				<li>TRAVEL</li>
+				<li id="bb101" value="horror" class="genre">HORROR</li>
+				<li id="romance" value="romance" class="genre">ROMANCE</li>
+				<li id="cook" value="cook" class="genre">COOK</li>
+				<li id="travel" value="travel" class="genre">TRAVEL</li>
 			</ul>
 		</div>
 		<article class="col_9">
