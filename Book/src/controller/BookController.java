@@ -102,7 +102,7 @@ public class BookController {
 				dao.insertFile(myFile);
 				fileList.add(myFile);
 
-				response.sendRedirect("writeResult.do?bookb_num=" + insertedBoardNum);
+				response.sendRedirect("writeResult.do?bookb_num="+ insertedBoardNum+"&bb_code="+bb_code);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

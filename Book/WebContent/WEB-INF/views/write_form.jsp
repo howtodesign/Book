@@ -55,7 +55,8 @@
 					</tr>
 
 					<tr>
-						<td><input type="submit" value="submit"></td>
+						<td><input type="submit" value="submit">
+						<a href="bookPage.do"><button id="bookAPI" name="bookAPI" value="bookAPI">bookAPI</button></a></td>
 					</tr>
 				</table>
 
