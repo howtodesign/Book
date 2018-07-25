@@ -3,10 +3,18 @@
 <mapper namespace="mapper.BookBoardMapper">
 
 <insert id="insertBoard" parameterType="BookBoardVO">
-insert into member(bookb_num, writer, title, book_name, bb_code, content, write_date)
-values(book_board_seq.nextval, #{writer}, #{title}, #{book_name}, #{bb_code}, #{content}, sysdate)
+  <!-- <selectKey keyProperty="bookb_num" resultType="int" order="BEFORE">
+    select book_board_seq.nextval FROM DUAL
+  </selectKey> 
+   <selectKey keyProperty="write_date" resultType="java.util.Date" order="AFTER">
+    select write_date FROM book_board WHERE bookb_num= #{bookb_num}
+  </selectKey> -->
+insert into BOOK_BOARD(bookb_num, writer, title, book_name, bb_code, content, write_date)
+values(book_board_seq.NEXTVAL, #{writer}, #{title}, #{book_name}, #{bb_code}, #{content}, sysdate)
 <selectKey order="AFTER" keyProperty="bookb_num" resultType="int">
+
 			select book_board_seq.currval from dual
+
 		</selectKey>
 </insert>
 

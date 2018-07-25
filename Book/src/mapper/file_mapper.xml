@@ -5,16 +5,24 @@
 <insert id="insertFile" parameterType="FileVO">
 insert into file_tb(file_num, original_name, saved_path, bookb_num, bb_code)
 		values(file_tb_seq.nextval, #{original_name}, #{saved_path}, #{bookb_num}, #{bb_code})
+		<selectKey order="AFTER" keyProperty="file_num" resultType="int">
+			select file_tb_seq.currval from dual
+		</selectKey>
 </insert>
 
 <select id="selectAll" resultMap="result">
 select * from file_tb where bookb_num=#{bookb_num}
 </select>
 
+<select id="selectFile" resultMap="result">
+select * from file_tb where file_num=#{file_num}
+
+</select>
+
 <resultMap type="FileVO" id="result">
 		<result column="file_num" property="file_num" />
 		<result column="original_name" property="original_name" />
-		<result column="real_path" property="real_path" />
+		<result column="saved_path" property="saved_path" />
 		<result column="bookb_num" property="bookb_num" />
 		<result column="bb_code" property="bb_code" />
 </resultMap>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CommentMapper">
+
+
+<insert id="insertComment">
+insert into book_comment(comment_num, bookb_num, writer, comment_pw, content, comment_origin_num, write_date, bookc_level, flag_lock)
+values(book_comment_seq.NEXTVAL, #{bookb_num}, #{writer}, #{comment_pw}, #{content}, 0, sysdate, 0, 0)
+<selectKey order="AFTER" keyProperty="comment_num" resultType="int">
+			select book_comment_seq.currval from dual
+		</selectKey>
+</insert>
+
+<select id="commentList">
+
+</select>
+
+<select id="selectBookb_num">
+ 
+
+</select>
+
+<resultMap type="CommentVO" id="result">
+<result column="comment_num" property="comment_num"/>
+<result column="bookb_num" property="bookb_num"/>
+<result column="writer" property="writer"/>
+<result column="content" property="content"/>
+<result column="comment_pw" property="comment_pw"/>
+<result column="write_date" property="write_date"/>
+<result column="bookc_level" property="bookc_level"/>
+<result column="flag_lock" property="flag_lock"/>
+
+
+</resultMap>
+
+</mapper>
