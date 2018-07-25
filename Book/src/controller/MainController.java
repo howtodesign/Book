@@ -15,15 +15,10 @@ public class MainController {
 	@Autowired
 	private MemberService service;
 	
-<<<<<<< HEAD
-
-
-=======
 	@RequestMapping("/main.do")
 	public String main(){
 		return "main";
 	}
->>>>>>> refs/remotes/origin/dev
 	
 	@RequestMapping("/joinForm.do") // go to joinPage
 	public String joinForm() {
