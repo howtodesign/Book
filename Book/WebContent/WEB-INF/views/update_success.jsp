@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <title></title>
 <link type="text/css" rel="stylesheet" href="resource/style.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 	<script type="text/javascript">

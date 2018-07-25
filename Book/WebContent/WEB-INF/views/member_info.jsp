@@ -4,7 +4,7 @@
     <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="resource/member_update.js"></script>
 <script type="text/javascript">
 //닉네임 중복체크
