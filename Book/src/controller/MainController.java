@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class MainController {
 	private MemberService service;
 	
 	@RequestMapping("/main.do")
-	public String main(){
+	public String main(HttpServletRequest request){
 		return "main";
 	}
 	
@@ -29,9 +30,16 @@ public class MainController {
 	public ModelAndView login(String userId, String userPw, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		if(service.loginCheck(userId, userPw)) {
+			if(service.isAdmin(userId)){
+				session.setAttribute("loginId", userId);
+				session.setAttribute("loginNick", service.getNickname(userId));
+				session.setAttribute("flagAdmin", "admin11");
+				mv.setViewName("login_success");
+			}else{
 			session.setAttribute("loginId", userId);
 			session.setAttribute("loginNick", service.getNickname(userId));
 			mv.setViewName("login_success");
+			}
 		}else {
 			mv.setViewName("login_fail");
 		}

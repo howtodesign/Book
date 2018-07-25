@@ -16,6 +16,6 @@ public interface MemberMapper {
 	
 	public int updatePassword(@Param("id")String id, @Param("password")String password); // 비밀번호만 변경
 	public int deleteMem(String id); // 회원 탈퇴
-	public int grantAdmin(@Param("id")String id, @Param("flagAdmin")String flagAdmin); // 회원 권한 설정
+	public String getFlag(String id); // 회원 등급 확인 
 	
 }

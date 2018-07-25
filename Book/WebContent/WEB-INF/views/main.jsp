@@ -25,6 +25,11 @@
 <link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
 <body>
+	<c:if test="${not empty sessionScope.flagAdmin }">
+		<script type="text/javascript">
+			location.href='adminMain.do';
+		</script>
+	</c:if>
 	<header>
 		<h1 class="gradient">Book Review</h1>
 		<h5>dreamING of breaking away from the routine of daily life</h5>

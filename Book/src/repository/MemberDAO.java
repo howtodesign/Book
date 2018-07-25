@@ -53,8 +53,9 @@ public class MemberDAO {
 		return mapper.deleteMem(id);
 	}
 	
-	public int grantAdmin(String id, String flagAdmin){
+	public String getFlag(String id){
 		MemberMapper mapper = template.getMapper(MemberMapper.class);
-		return mapper.grantAdmin(id, flagAdmin);
+		return mapper.getFlag(id);
 	}
+
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.AdminMapper">
+	<select id="selectMemberList" resultMap="memberMap">
+		SELECT ID, PASSWORD, NAME, NICKNAME, PHONE, EMAIL,
+		TO_CHAR(REGIST_DATE, 'YYYY-MM-DD hh24:mi') AS REGIST_DATE, FLAG_ADMIN	
+		FROM (
+			SELECT ROWNUM AS RNUM, ID, PASSWORD, NAME, NICKNAME, PHONE, EMAIL,
+			REGIST_DATE, FLAG_ADMIN	FROM (
+				SELECT * FROM MEMBER 
+				WHERE ID&lt;&gt;'admin1' AND ID&lt;&gt;#{adminId}
+				ORDER BY FLAG_ADMIN, REGIST_DATE
+			)
+		) WHERE RNUM&gt;=#{startRow} AND RNUM&lt;=#{endRow}
+	</select>
+	
+	<select id="selectMemberCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE ID&lt;&gt;'admin1' AND ID&lt;&gt;#{adminId}
+	</select>
+	
+	<update id="updateFlag">
+		UPDATE MEMBER
+		SET
+			FLAG_ADMIN=#{flag_admin}
+		WHERE
+			ID = #{id}
+	</update>
+	
+	<resultMap type="MemberVO" id="memberMap">
+		<result column="ID" property="id"/>
+		<result column="PASSWORD" property="password"/>
+		<result column="NAME" property="name"/>
+		<result column="NICKNAME" property="nickname"/>
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="REGIST_DATE" property="regist_date"/>
+		<result column="FLAG_ADMIN" property="flag_admin"/>
+	</resultMap>
+</mapper>
