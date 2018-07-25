@@ -11,20 +11,18 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	 $(function() {
-		 $(".genre").on("click",function(){
+	
+		 $(".genre").click(function(){
 			 var selectedGenre = $(this).attr('value'); 
 			
 			 if(selectedGenre=="horror"){
 				 var bb_code =$(this).attr('id');
 			
-			 window.location.href = "horror.do?bb_code="+bb_code;
+			 location.href = "${pageContext.request.contextPath}/horror.do?bb_code="+bb_code;
 			 }
 			 
-			 
-			 })
-		 
-		 
-		 
+			 return false;
+			 });	 
 	 })
 	
 	</script>
@@ -47,7 +45,6 @@
 				<li id="romance" value="romance" class="genre">ROMANCE</li>
 				<li id="cook" value="cook" class="genre">COOK</li>
 				<li id="travel" value="travel" class="genre">TRAVEL</li>
-
 			</ul>
 		</div>
 		<article class="col_9">

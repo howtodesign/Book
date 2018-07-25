@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,17 +29,28 @@ import vo.FileVO;
 public class BookController {
 
 	@Autowired
-	private BookBoardService bookBoardService;
+	private BookBoardService service;
+	
 	@Autowired
 	private FileDAO dao;
 	
 	
 	
+	
+
+	@RequestMapping("/main.do")
+
+	public String main(){
+
+		return "main";
+
+	}
+	
 	@RequestMapping("/horror.do")
-	public ModelAndView HorrorPage(@RequestParam(defaultValue="1")int p,String bb_code, HttpSession session) {
+	public ModelAndView HorrorPage(@RequestParam(defaultValue="1")int p,String bb_code, HttpSession session, BookBoardVO vo) {
 		
 			ModelAndView mv = new ModelAndView();
-			mv.addObject("horrorBoardPage", bookBoardService.makePage(p, bb_code));
+			mv.addObject("horrorBoardPage", service.makePage(p, bb_code, vo));
 			mv.setViewName("horrorBoard");
 	
 			return mv;
@@ -61,7 +72,7 @@ public class BookController {
 	/*	String loginId = (String) session.getAttribute("loginId");
 		vo.setWriter(loginId);*/
 		
-		int insertedBoardNum = bookBoardService.insertedBoardNum(vo, request);
+		int insertedBoardNum = service.insertedBoardNum(vo, request);
 		
 		String dirPath = "c:/springFiles/";
 

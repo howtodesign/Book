@@ -19,7 +19,6 @@ import service.MemberService;
 
 
 @Controller
-
 public class MainController {
 
 
@@ -30,18 +29,10 @@ public class MainController {
 
 	
 
-	@RequestMapping("/main.do")
-
-	public String main(){
-
-		return "main";
-
-	}
 
 	
 
 	@RequestMapping("/joinForm.do") // go to joinPage
-
 	public String joinForm() {
 
 		return "join_form";
@@ -51,7 +42,6 @@ public class MainController {
 	
 
 	@RequestMapping("/login.do") // login
-
 	public ModelAndView login(String userId, String userPw, HttpSession session) {
 
 		ModelAndView mv = new ModelAndView();
@@ -77,7 +67,6 @@ public class MainController {
 	
 
 	@RequestMapping("/logout.do") // logout
-
 	public String logout(HttpSession session) {
 
 		session.invalidate();
@@ -89,7 +78,6 @@ public class MainController {
 	
 
 	@RequestMapping("/checkPassword.do")
-
 	public String memberInfo() {
 
 		return "check_password";

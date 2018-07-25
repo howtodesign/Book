@@ -28,23 +28,18 @@ import vo.MemberVO;
 
 
 @Controller
-
 public class MemberController {
 
 
 
 	@Autowired
-
 	private MemberService service;
 
 	
 
 	@RequestMapping("/idCheck.do") // id check
-
 	@ResponseBody
-
 	public String idCheck(String id) {
-
 		if(service.getNickname(id) == null) {
 
 			return "true";
@@ -60,9 +55,7 @@ public class MemberController {
 	
 
 	@RequestMapping("/nickCheck.do") // nickname check
-
 	@ResponseBody
-
 	public String nickCheck(String nick) {
 
 		if(service.checkNick(nick) == null) {
@@ -80,7 +73,6 @@ public class MemberController {
 	
 
 	@RequestMapping("/join.do") // join
-
 	public String joinProc(MemberVO member) {
 
 		if(service.memberValidator(member)) {
@@ -100,7 +92,6 @@ public class MemberController {
 	
 
 	@RequestMapping("/memberInfo.do")
-
 	public ModelAndView memberInfo(String userPw, HttpSession session) {
 
 		
@@ -126,9 +117,7 @@ public class MemberController {
 	
 
 	@RequestMapping("/getMember.do")
-
 	@ResponseBody
-
 	public void getMember(String id, HttpServletResponse response){
 
 
@@ -180,9 +169,7 @@ public class MemberController {
 	
 
 	@RequestMapping("/updateMember.do")
-
 	public ModelAndView updateProc(MemberVO member, HttpSession session) {
-
 		ModelAndView mv = new ModelAndView();
 
 			if(service.updateValidator(member)) {
@@ -204,7 +191,6 @@ public class MemberController {
 	
 
 	@RequestMapping("updatePasswordForm.do")
-
 	public String updatePasswordForm(){
 
 		return "update_password_form";
@@ -214,7 +200,6 @@ public class MemberController {
 	
 
 	@RequestMapping("updatePassword.do")
-
 	public String updatePassword(String beforepassword, String password, String passwordre, HttpSession session){
 
 		String id = (String)session.getAttribute("loginId");
@@ -252,7 +237,6 @@ public class MemberController {
 	
 
 	@RequestMapping("deleteMemberForm.do")
-
 	public String deleteMemberForm(){
 
 		return "delete_member_form";
@@ -262,7 +246,6 @@ public class MemberController {
 	
 
 	@RequestMapping("deleteMember.do")
-
 	public String deleteMember(String password, String passwordre, HttpSession session){
 
 		String id = (String)session.getAttribute("loginId");
