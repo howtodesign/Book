@@ -4,20 +4,9 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-<<<<<<< HEAD
-<meta charset=UTF-8">
-<title></title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript">
-	 $(function() {
-	
-=======
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		
->>>>>>> refs/remotes/origin/dev
 		 $(".genre").click(function(){
 			 var selectedGenre = $(this).attr('value'); 
 			
@@ -29,18 +18,10 @@
 			 
 			 return false;
 			 });	 
-<<<<<<< HEAD
-	 })
-	
-	</script>
-	
-<link href="css/style.css" rel="stylesheet" type="text/css">
-=======
 	})
 </script>
 <title>This is mainpage</title>
 <link type="text/css" rel="stylesheet" href="resource/style.css">
->>>>>>> refs/remotes/origin/dev
 </head>
 <body>
 	<header>
