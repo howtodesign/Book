@@ -13,7 +13,7 @@
 			 if(selectedGenre=="horror"){
 				 var bb_code =$(this).attr('id');
 			
-			 location.href = "${pageContext.request.contextPath}/horror.do?bb_code="+bb_code;
+			 location.href = "horror.do?bb_code="+bb_code;
 			 }
 			 
 			 return false;
