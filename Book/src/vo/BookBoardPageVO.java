@@ -10,6 +10,7 @@ public class BookBoardPageVO {
 	private int totalPage;
 	private int currentPage;
 	private int number;
+	private String bb_code;
 	public List<BookBoardVO> getBookBoardList() {
 		return bookBoardList;
 	}
@@ -46,13 +47,20 @@ public class BookBoardPageVO {
 	public void setNumber(int number) {
 		this.number = number;
 	}
+	
+	public String getBb_code() {
+		return bb_code;
+	}
+	public void setBb_code(String bb_code) {
+		this.bb_code = bb_code;
+	}
 	@Override
 	public String toString() {
 		return "BookBoardPageVO [bookBoardList=" + bookBoardList + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", number=" + number + "]";
 	}
 	public BookBoardPageVO(List<BookBoardVO> bookBoardList, int startPage, int endPage, int totalPage, int currentPage,
-			int number) {
+			int number, String bb_code) {
 		super();
 		this.bookBoardList = bookBoardList;
 		this.startPage = startPage;
@@ -60,6 +68,7 @@ public class BookBoardPageVO {
 		this.totalPage = totalPage;
 		this.currentPage = currentPage;
 		this.number = number;
+		this.bb_code = bb_code;
 	}
 	
 	public BookBoardPageVO() {

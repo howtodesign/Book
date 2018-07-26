@@ -1,22 +1,19 @@
 package controller;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import repository.FileDAO;
 import service.BookBoardService;
 import service.CommentService;
+import service.FileService;
 import vo.BookBoardVO;
 import vo.FileVO;
 
@@ -38,15 +36,14 @@ public class BookController {
 	private BookBoardService service;
 
 	@Autowired
-	private FileDAO dao;
-
+	private FileService fservice;
+	
 	@Autowired
 	private CommentService commentService;
 	
 	@RequestMapping("/horror.do")
-	public ModelAndView HorrorPage(@RequestParam(defaultValue = "1") int p, String bb_code, HttpSession session,
-			BookBoardVO vo) {
-
+	public ModelAndView HorrorPage(@RequestParam(value="p", defaultValue = "1") int p, String bb_code, BookBoardVO vo) {
+	
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("horrorBoardPage", service.makePage(p, bb_code, vo));
 		mv.setViewName("horrorBoard");
@@ -56,57 +53,31 @@ public class BookController {
 	}
 
 	@RequestMapping("/writeForm.do")
-	public String writeForm(HttpSession session) {
+	public String writeForm() {
 
 		return "write_form";
 
 	}
 
 	@RequestMapping("/write.do")
+	@ResponseBody
 	public void write(HttpSession session, HttpServletResponse response, HttpServletRequest request,
 			@RequestParam("uploadFiles") MultipartFile[] files, BookBoardVO vo) {
 		String loginNick = (String) session.getAttribute("loginNick");
 		vo.setWriter(loginNick);
 
-		int insertedBoardNum = service.insertedBoardNum(vo, request);
-
-		String dirPath = "c:/springFiles/";
-
-		File dir = new File(dirPath);
-
-		if (dir.exists() == false) {
-			dir.mkdir();
+		int insertedBoardNum = service.insertedBoardNum(vo);
+		
+		if(!files[0].isEmpty()){
+			fservice.fileUpload(request, files, vo, insertedBoardNum);
 		}
-
-		List<FileVO> fileList = new ArrayList<>();
-		for (MultipartFile f : files) {
-			String savedName = new Random().nextInt(1000000000) + "";
-			String savedPath = dirPath + savedName;
-			String originalName = f.getOriginalFilename();
-			String bb_code = request.getParameter("bb_code");
-			FileVO myFile = new FileVO();
-
-			myFile.setBookb_num(insertedBoardNum);
-			myFile.setOriginal_name(originalName);
-			myFile.setSaved_path(savedPath);
-			myFile.setBb_code(bb_code);
-
-			File savedFile = new File(savedPath);
-
-			try {
-				f.transferTo(savedFile);
-				dao.insertFile(myFile);
-				fileList.add(myFile);
-
-				response.sendRedirect("writeResult.do?bookb_num=" + insertedBoardNum + "&bb_code=" + bb_code);
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
+		
+		try {
+			response.sendRedirect("writeResult.do?bookb_num=" + insertedBoardNum + "&bb_code=" + vo.getBb_code());
+		} catch (IOException e) {
+			System.out.println("글쓰기 실패");
+			e.printStackTrace();
 		}
-
 	}
 
 	@RequestMapping("/writeResult.do")
@@ -114,7 +85,7 @@ public class BookController {
 
 		ModelAndView mv = new ModelAndView("write_result");
 		mv.addObject("insertedBoard", service.readWithoutCount(bookb_num));
-		mv.addObject("fileList", dao.selectAll(bookb_num));
+		mv.addObject("fileList", fservice.getFiles(bookb_num));
 		return mv;
 	}
 
@@ -126,7 +97,7 @@ public class BookController {
 		ModelAndView mv = new ModelAndView("read");
 		mv.addObject("readBoard", service.readWithReadCount(bookb_num));
 		mv.addObject("page", p);
-		mv.addObject("fileList", dao.selectAll(bookb_num));
+		mv.addObject("fileList", fservice.getFiles(bookb_num));
 		return mv;
 	}
 	
@@ -134,7 +105,7 @@ public class BookController {
 	@RequestMapping("/download.do")
 	@ResponseBody
 	public void download(int file_num, int bookb_num, HttpServletResponse response) throws UnsupportedEncodingException {
-		FileVO vo = dao.selectFile(file_num);
+		FileVO vo = fservice.getFile(file_num);
 		System.out.println(vo);
 
 		String filename = vo.getOriginal_name();
@@ -184,7 +155,6 @@ public class BookController {
         out.println(result);        
     }
 
-	
 	/*@RequestMapping(value="/commentList.do")
     public void commentList(HttpServletRequest request, HttpServletResponse response) throws Exception {//ajax는 void형 함수를 사용한다.
         request.setCharacterEncoding("utf-8");
@@ -196,5 +166,25 @@ public class BookController {
         out.println(result);        
     }*/
 
+	@RequestMapping("/processUpDown.do")
+	@ResponseBody
+	public void processUpDown(String code, int bookb_num, HttpServletResponse response){
+		
+		String bookJson;
+		
+		BookBoardVO bookboard = service.processUpDown(code, bookb_num);
+		
+		if(bookboard != null){
+	        bookJson = "{\"recommend\":\""+bookboard.getRecommend()
+	                    +"\",\"opposite\":\""+bookboard.getOpposite()+"\"}";
+	    }else{
+	        bookJson = "null";
+	    }
 
+	    try {
+	        response.getWriter().print(bookJson);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }   
+	}
 }

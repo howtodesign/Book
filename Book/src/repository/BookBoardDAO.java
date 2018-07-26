@@ -48,4 +48,19 @@ public class BookBoardDAO {
 		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
 		return bookBoardMapper.selectBookBoardOnOnePage(startRow, viewRow, bb_code);
 	}
+	
+	public BookBoardVO processUpDown(int bookb_num){
+		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
+		return bookBoardMapper.selectUpDown(bookb_num);
+	}
+	
+	public int processUp(int bookb_num){
+		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
+		return bookBoardMapper.upRecommend(bookb_num);
+	}
+	
+	public int processDown(int bookb_num){
+		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
+		return bookBoardMapper.downOpposite(bookb_num);
+	}
 }

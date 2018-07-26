@@ -6,6 +6,42 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+	function recommend() {
+		$.ajax({
+			url : "processUpDown.do",
+			method : "post",
+			data : {code : "up", bookb_num:"${readBoard.bookb_num}"}, 
+			datatype : "text",
+			success : function(result) {
+				if(result != "null"){
+				var book = JSON.parse(result);
+				$("#bookup").text(book.recommend);
+				}
+			},
+			error : function(ex) {
+				alert(ex);
+			}
+		})
+	}
+	
+	function opposite() {
+		$.ajax({
+			url : "processUpDown.do",
+			method : "post",
+			data : {code : "down", bookb_num:"${readBoard.bookb_num}"}, 
+			datatype : "text",
+			success : function(result) {
+				if(result != "null"){
+				var book = JSON.parse(result);
+				$("#bookdown").text(book.opposite);
+				}
+			},
+			error : function(ex) {
+				alert(ex);
+			}
+		})
+	}
+
 	$(function() {
 		
 		$("#horrorList").click(function() {
@@ -70,8 +106,24 @@
 		 return false;		
 	})
 
-						
-						
+	
+	$.ajax({
+			url : "processUpDown.do",
+			method : "post",
+			data : {code : "check", bookb_num:"${readBoard.bookb_num}"}, 
+			datatype : "text",
+			success : function(result) {
+				if(result != "null"){
+				var book = JSON.parse(result);
+				$("#bookup").text(book.recommend);
+				$("#bookdown").text(book.opposite);
+				}
+			},
+			error : function(ex) {
+				alert(ex);
+			}
+		})
+	
 })
 </script>
 <link type="text/css" rel="stylesheet" href="resource/style.css">
@@ -123,6 +175,7 @@
 				<c:choose>
 					<c:when test="${empty fileList}">
 						<tr>
+							<td>file:</td>
 							<td>no list uploaded</td>
 						</tr>
 					</c:when>
@@ -154,7 +207,10 @@
 						<%-- <%-- <a href="updateCheck.do?boardNum=${readBoard.boardNum}"><button>modify</button></a>
 						<a href="deleteCheck.do?boardNum=${readBoard.boardNum}"><button>delete</button></a>
 						<a href="replyForm.do?boardNum=${readBoard.boardNum}&p=${page}"><button>reply</button></a> --%>
-
+					</td>
+					<td>
+						<button id="recommend" onclick="recommend()">↑</button><label for="recommend" id="bookup"></label> 
+						 <button id="opposite" onclick="opposite()">↓</button><label for="opposite" id="bookdown"></label>
 					</td>
 				</tr>
 
