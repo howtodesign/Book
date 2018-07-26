@@ -58,6 +58,9 @@
 							<c:if test="${m.flag_admin eq 'admin13'}">
 							<td>admin</td>	
 							</c:if>
+							<c:if test="${member.flag_admin eq 'b'}">
+							<td>ban</td>	
+							</c:if>
 							<td>${m.regist_date }</td>
 							<td>
 								<form action="adminMemberInfo.do" method="post">
