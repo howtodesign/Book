@@ -55,9 +55,10 @@
 
 
 				<c:if test="${not empty horrorBoardPage.bookBoardList}">
-					<c:forEach items="${horrorBoardPage.bookBoardList}" var="horrorBoard">
+				<c:set var="number" value="${horrorBoardPage.number}"/>
+					<c:forEach items="${horrorBoardPage.bookBoardList}" var="horrorBoard" varStatus="i">
 						<tr>
-							<td>${horrorBoard.bookb_num}</td>
+							<td>${number-i.index}</td>
 							<td>${horrorBoard.writer}</td>
 							<td><a
 								href="read.do?bookb_num=${horrorBoard.bookb_num}&p=${horrorBoardPage.currentPage}">

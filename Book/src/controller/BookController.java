@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import repository.FileDAO;
 import service.BookBoardService;
+import service.BookService;
 import service.CommentService;
 import service.FileService;
 import vo.BookBoardVO;
@@ -40,6 +41,10 @@ public class BookController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private BookService bookService;
+	
 	
 	@RequestMapping("/horror.do")
 	public ModelAndView HorrorPage(@RequestParam(value="p", defaultValue = "1") int p, String bb_code, BookBoardVO vo) {
@@ -145,6 +150,7 @@ public class BookController {
 	}
 
 	@RequestMapping("/comment.do")
+	@ResponseBody
     public void insertComment(HttpServletRequest request,HttpServletResponse response) throws Exception {//ajax는 void형 함수를 사용한다.
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
@@ -155,7 +161,9 @@ public class BookController {
         out.println(result);        
     }
 
-	/*@RequestMapping(value="/commentList.do")
+	
+	@RequestMapping(value="/commentList.do")
+	@ResponseBody
     public void commentList(HttpServletRequest request, HttpServletResponse response) throws Exception {//ajax는 void형 함수를 사용한다.
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
@@ -164,7 +172,23 @@ public class BookController {
         String result = (String) map.get("AjaxMember");
         System.out.println(result+"------------------------------");
         out.println(result);        
-    }*/
+    }
+
+
+
+	@RequestMapping("/bookPage.do")
+	public String bookPage() {
+		return "book_page";
+	}
+
+	@RequestMapping(value = "/bookSearch.do")
+	@ResponseBody 
+	public String bookSearch(String keyword) throws UnsupportedEncodingException {
+
+		return URLEncoder.encode(bookService.bookSearch(keyword), "UTF-8");
+
+	}
+	
 
 	@RequestMapping("/processUpDown.do")
 	@ResponseBody
@@ -187,4 +211,5 @@ public class BookController {
 	        e.printStackTrace();
 	    }   
 	}
+
 }

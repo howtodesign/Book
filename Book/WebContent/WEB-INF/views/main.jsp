@@ -12,7 +12,6 @@
 			
 			 if(selectedGenre=="horror"){
 				 var bb_code =$(this).attr('id');
-			
 			 location.href = "horror.do?bb_code="+bb_code;
 			 }
 			 
@@ -24,7 +23,7 @@
 <link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
 <body>
-	<c:if test="${not empty sessionScope.flagAdmin }">
+	<c:if test="${not empty sessionScope.flagAdmin}">
 		<script type="text/javascript">
 			location.href='adminMain.do';
 		</script>
@@ -38,7 +37,7 @@
 		<div class="col_3 sidebar">
 			<div class="loginStation">
 				<c:choose>
-				 <c:when test="${empty sessionScope.loginId }">
+				 <c:when test="${empty sessionScope.loginId}">
 				 	<form action="login.do" method="post">
 				 		<table>
 				 			<tr>
@@ -53,7 +52,7 @@
 					</form>
 				 </c:when>
 				 <c:otherwise>
-				 	${sessionScope.loginNick } welcome  <a href="checkPassword.do">memberinfo</a><br>
+				 	${sessionScope.loginNick} welcome  <a href="checkPassword.do">memberinfo</a><br>
 				 	<a href="logout.do">logout</a>
 				 </c:otherwise>	
 				</c:choose>

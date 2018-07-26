@@ -37,7 +37,7 @@ select bookb_num, writer, title, book_name, content, readcount, to_char(sysdate,
 from(
    select rownum as rnum, bookb_num, writer, title, book_name, content, readcount, write_date 
    from (
-		select * from book_board where bb_code=#{bb_code} order by bookb_num desc
+         select * from book_board where bb_code=#{bb_code} order by bookb_num desc
 			)
 		)where rnum&gt;=#{startRow} and rnum&lt;=#{viewRow}
 </select>
