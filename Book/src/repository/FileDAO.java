@@ -25,5 +25,9 @@ public class FileDAO {
 		return mapper.selectAll(boardNum);
 	}
 	
-	
+	public FileVO selectFile(int file_num) {
+		FileMapper mapper = template.getMapper(FileMapper.class);
+		return mapper.selectFile(file_num);
+		
+	}
 }
