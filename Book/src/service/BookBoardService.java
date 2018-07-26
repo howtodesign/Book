@@ -18,11 +18,12 @@ public class BookBoardService {
 	@Autowired
 	private BookBoardDAO bookBoardDAO;
 	
+	private static final int PAGE_PER_COUNT = 10;
+	private static final int PAGE_PER_BLOCK=10;
 
 	
 	public BookBoardPageVO makePage(int currentPage, String bb_code, BookBoardVO vo) {
-		final int PAGE_PER_COUNT = 10;
-		final int PAGE_PER_BLOCK=10;
+		
 		int totalBoardCount = bookBoardDAO.selectBookBoardCount(bb_code);	
 		System.out.println(vo.getBook_name()+vo.getBb_code());
 		int totalPage= totalBoardCount / PAGE_PER_COUNT;
@@ -30,8 +31,8 @@ public class BookBoardService {
 			totalPage++;
 		}
 		//WHAT IS THIS MEANS...? BOARD BOARD NUM ...../
-		int number = totalBoardCount-(currentPage-1)*PAGE_PER_COUNT;
-		
+		int number = totalBoardCount+(currentPage-1)*PAGE_PER_COUNT;
+		System.out.println("number:"+number);
 		
 		int startRow = (currentPage - 1) * PAGE_PER_BLOCK+1;
 		int endRow= currentPage* PAGE_PER_BLOCK ;
@@ -43,7 +44,7 @@ public class BookBoardService {
 			endPage = totalPage;
 		}
 
-		return new BookBoardPageVO(bookBoardList, startPage, endPage, totalPage, currentPage, number);
+		return new BookBoardPageVO(bookBoardList, startPage, endPage, totalPage, currentPage, number, bb_code);
 	}
 
 	public int insertedBoardNum(BookBoardVO vo, HttpServletRequest request) {

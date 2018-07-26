@@ -11,14 +11,11 @@ values(book_comment_seq.NEXTVAL, #{bookb_num}, #{writer}, #{comment_pw}, #{conte
 		</selectKey>
 </insert>
 
-<select id="commentList">
-
+<select id="commentList" resultMap="result">
+select * from book_comment where bookb_num=#{bookb_num} order by write_date desc
 </select>
 
-<select id="selectBookb_num">
- 
 
-</select>
 
 <resultMap type="CommentVO" id="result">
 <result column="comment_num" property="comment_num"/>

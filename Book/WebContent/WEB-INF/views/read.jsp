@@ -7,6 +7,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		var bookb_num = $("input[name=bookb_num]").val();
+		getList(bookb_num);
 		
 		$("#horrorList").click(function() {
 							var bb_code = $(this).val();
@@ -15,9 +17,9 @@
 		return false;				
 		})
 
-		var bookb_num = $("input[name=bookb_num]").val();
+		
 		function getList(bookb_num) {
-			$.ajax({
+			$.ajax({	
 						url : "${pageContext.request.contextPath}/commentList.do?bookb_num="+bookb_num,
 						type : "get",
 						dataType : "xml",
@@ -25,20 +27,23 @@
 							var table = "";
 							$(data).find("comment").each(function() {
 												table += "<tr>";
-												table += "<td>"+$(this).find("comment_num").text()+"</td>";
-												table += "<td>"+$(this).find("writer").text()+"</td>";
-												table += "<td>"+ $(this).find("content").text()+ "</td>";
-												table += "<td>"+ $(this).find("write_date").text()+ "</td>";
-												table += "<td>"
+												table += "<td width="+'10%'+" align="+'left'+">"+$(this).find("writer").text()+": "+"</td>";
+												table += "<td width="+'50%'+" align="+'left'+">"+ $(this).find("content").text()+ "</td>";
+												table += "<td width="+'20%'+" align="+'left'+">"+ $(this).find("write_date").text()+ "</td>";
+												table+="<td>"
 												table+= "<input type='button' value='delete' id='cDel_"+$(this).find("comment_num").text()+ "' name='cDelete_"+ $(this).find("comment_num").text()+ "' />";
-												table+= "<input type='button' value='delete' id='cId_"+$(this).find("comment_num").text()+ "' name='cName_"+ $(this).find("comment_num").text()+ "' />";
+												table+= "<input type='button' value='write' id='cId_"+$(this).find("comment_num").text()+ "' name='cName_"+ $(this).find("comment_num").text()+ "' />";
+												table+= "<input type='hidden' value='cVal"+$(this).find("comment_num").text()+ "' id='cId_"+$(this).find("comment_num").text()+ "' name='cNum_"+ $(this).find("comment_num").text()+ "' />";
+												table+= "<hr>";
 												table += "</tr>";
+												
 											});
-							$("#"+boardNum).append(table);
+							$("#"+bookb_num).append(table);
+							
 						},
-						error : function name() {
-							alert("fail")
-						}
+						 error:function(ex){
+								alert(ex)
+							}
 					});
 		return false;
 		
@@ -55,8 +60,8 @@
 	                success : function(data) {
 	                    if(data == 1){
 	                        alert("success send comment");
-//	                        $("#sendComment").empty();
-	                        getList(bookb_num);
+							getList(bookb_num);
+							alert(bookb_num);
 	                        $("textarea").val("");
 	                        $("input[type=password]").val("");
 	                    }else{
@@ -70,8 +75,8 @@
 		 return false;		
 	})
 
-						
-						
+	
+			
 })
 </script>
 <link type="text/css" rel="stylesheet" href="resource/style.css">
@@ -84,8 +89,12 @@
 		<h1 class="gradient">Book Review</h1>
 		<h5>dreamING of breaking away from the routine of daily life</h5>
 	</header>
+	
+	
+
 
 	<section>
+	
 		<div class="col_3 sidebar">
 			<div class="loginStation">
 				${sessionScope.loginNick } welcome <a href="checkPassword.do">memberinfo</a><br>
@@ -100,11 +109,13 @@
 			</ul>
 		</div>
 
+
 		<article class="col_9">
+		<div id="scroller" style="overflow:auto; width:100%; height:400px;">
 			<h1>read page</h1>
 
 			<table border="1">
-				<tr>
+				<tr >
 					<td width="10%">num:</td>
 					<td width="90%">${readBoard.bookb_num}</td>
 				</tr>
@@ -150,7 +161,9 @@
 				</tr>
 
 				<tr>
-					<td><button id="horrorList" value="bb101">horrorList</button>
+					<td colspan="2"><button id="horrorList" value="bb101">horrorList</button>
+				<a href="bookPage.do" target="_blank"><button id="bookAPI" value="bookAPI">bookAPI</button></a>
+				<!-- <a href="bookPage.do" target="_blank">새창으로 가자</a> -->
 						<%-- <%-- <a href="updateCheck.do?boardNum=${readBoard.boardNum}"><button>modify</button></a>
 						<a href="deleteCheck.do?boardNum=${readBoard.boardNum}"><button>delete</button></a>
 						<a href="replyForm.do?boardNum=${readBoard.boardNum}&p=${page}"><button>reply</button></a> --%>
@@ -174,11 +187,16 @@
 					pw:<input type="password" name="comment_pw" size="10"> <input
 						type="submit" value="submit" id="submit">
 					<hr>
-				</form>
+			
+			<div id="${readBoard.bookb_num}">
+			
 			</div>
 			
+				</form>
 			
-			<div id="#_${bookb_num}">
+			
+			
+			
 			
 			
 			<div id="${comment.comment_num}" style="display: none;">
@@ -192,9 +210,11 @@
 			</div>
 			
 			</div>
+			</div>
 		</article>
+	
 	</section>
-
+	
 	<footer>
 		<p>Footer</p>
 	</footer>

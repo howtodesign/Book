@@ -55,9 +55,10 @@
 
 
 				<c:if test="${not empty horrorBoardPage.bookBoardList}">
-					<c:forEach items="${horrorBoardPage.bookBoardList}" var="horrorBoard">
+				<c:set var="number" value="${horrorBoardPage.number}"/>
+					<c:forEach items="${horrorBoardPage.bookBoardList}" var="horrorBoard" varStatus="i">
 						<tr>
-							<td>${horrorBoard.bookb_num}</td>
+							<td>${number-i.index}</td>
 							<td>${horrorBoard.writer}</td>
 							<td><a
 								href="read.do?bookb_num=${horrorBoard.bookb_num}&p=${horrorBoardPage.currentPage}">
@@ -73,7 +74,7 @@
 <div id="paging" align="center">
 
 		<c:if test="${horrorBoardPage.startPage gt 1}">
-			<a href="horror.do?p=${horrorBoardPage.startPage-1}&bb_code=bb101">[pre]</a>
+			<a href="horror.do?p=${horrorBoardPage.startPage-1}&bb_code=${horrorBoardPage.bb_code}">[pre]</a>
 		</c:if>
 
 		<c:forEach begin="${horrorBoardPage.startPage}" end="${horrorBoardPage.endPage}" var="i">
@@ -81,7 +82,7 @@
 		</c:forEach>
 
 		<c:if test="${horrorBoardPage.endPage lt horrorBoardPage.totalPage}">
-			<a href="horror.do?p=${horrorBoardPage.endPage+1}&bb_code=bb101">[next]</a>
+			<a href="horror.do?p=${horrorBoardPage.endPage+1}&bb_code=${horrorBoardPage.bb_code}">[next]</a>
 		</c:if>
 		
 		 <input type="hidden" name="loginId"
