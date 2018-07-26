@@ -8,6 +8,6 @@ public interface FileMapper {
 
 	public List<FileVO> selectAll(int bookb_num);
 	public int insertFile(FileVO vo);
-	
+	public FileVO selectFile(int file_num);
 	
 }

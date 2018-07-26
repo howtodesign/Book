@@ -3,10 +3,18 @@
 <mapper namespace="mapper.BookBoardMapper">
 
 <insert id="insertBoard" parameterType="BookBoardVO">
-insert into member(bookb_num, writer, title, book_name, bb_code, content, write_date)
-values(book_board_seq.nextval, #{writer}, #{title}, #{book_name}, #{bb_code}, #{content}, sysdate)
+  <!-- <selectKey keyProperty="bookb_num" resultType="int" order="BEFORE">
+    select book_board_seq.nextval FROM DUAL
+  </selectKey> 
+   <selectKey keyProperty="write_date" resultType="java.util.Date" order="AFTER">
+    select write_date FROM book_board WHERE bookb_num= #{bookb_num}
+  </selectKey> -->
+insert into BOOK_BOARD(bookb_num, writer, title, book_name, bb_code, content, write_date)
+values(book_board_seq.NEXTVAL, #{writer}, #{title}, #{book_name}, #{bb_code}, #{content}, sysdate)
 <selectKey order="AFTER" keyProperty="bookb_num" resultType="int">
+
 			select book_board_seq.currval from dual
+
 		</selectKey>
 </insert>
 
@@ -25,9 +33,9 @@ from book_board order by bookb_num desc where bb_code=#{bb_code}
 </select> 
 
 <select id="selectBookBoardOnOnePage" resultMap="result">
-select bookb_num, writer, title, content, readcount, to_char(sysdate, 'yyyy-mm-dd hh:mm:ss') as write_date 
+select bookb_num, writer, title, book_name, content, readcount, to_char(sysdate, 'yyyy-mm-dd hh:mm:ss') as write_date 
 from(
-   select rownum as rnum, bookb_num, writer, title, content, readcount, write_date 
+   select rownum as rnum, bookb_num, writer, title, book_name, content, readcount, write_date 
    from (
 		select * from book_board order by bookb_num desc
 			)

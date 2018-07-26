@@ -3,7 +3,20 @@
 <html>
 <head>
 <title></title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#btnAdd').click(function() {
+		var addElement = '<br><input type="file" name="uploadFiles">';
+		$('button[id="btnMinus"]').after(addElement);
+		return false;
+	
+		
+	 })
+})
+</script>
+<link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
 <body>
 
@@ -14,7 +27,8 @@
 
 	<section>
 		<div class="col_3 sidebar">
-			<div class="loginStation"></div>
+			<div class="loginStation">${sessionScope.loginNick} welcome <a href="checkPassword.do">memberinfo</a><br>
+				 	<a href="logout.do">logout</a></div>
 
 			<ul>
 				<li id="bb101" value="horror" class="genre">HORROR</li>
@@ -29,15 +43,19 @@
 
 
 			<form action="write.do" method="post" enctype="multipart/form-data">
-				
+				<input type="hidden" name="bb_code" value="bb101">
 				<table border="1">
+					<tr>
+					<td>book_name:</td>
+					<td><input type="text" name="book_name" size="50"></td>
+					</tr>
 					<tr>
 						<td>title:</td>
 						<td><input type="text" name="title" size="50"></td>
 					</tr>
 					<tr>
 						<td>writer:</td>
-						<td>null</td>
+						<td>${sessionScope.loginNick}</td>
 					</tr>
 					<tr>
 						<td>file:</td>
@@ -53,7 +71,9 @@
 					</tr>
 
 					<tr>
-						<td><input type="submit" value="submit"></td>
+						<td><input type="submit" value="submit"> <a
+							href="bookPage.do"><button id="bookAPI" name="bookAPI"
+									value="bookAPI">bookAPI</button></a></td>
 					</tr>
 				</table>
 

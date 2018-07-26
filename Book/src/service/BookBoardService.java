@@ -18,10 +18,13 @@ public class BookBoardService {
 	@Autowired
 	private BookBoardDAO bookBoardDAO;
 	
-	public BookBoardPageVO makePage(int currentPage, String bb_code) {
+
+	
+	public BookBoardPageVO makePage(int currentPage, String bb_code, BookBoardVO vo) {
 		final int PAGE_PER_COUNT = 10;
 		final int PAGE_PER_BLOCK=10;
 		int totalBoardCount = bookBoardDAO.selectBookBoardCount(bb_code);	
+		System.out.println(vo.getBook_name()+vo.getBb_code());
 		int totalPage= totalBoardCount / PAGE_PER_COUNT;
 		if (totalBoardCount % PAGE_PER_COUNT != 0) {
 			totalPage++;

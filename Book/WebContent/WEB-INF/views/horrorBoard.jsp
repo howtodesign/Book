@@ -6,7 +6,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title></title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
 <body>
 
@@ -18,7 +18,10 @@
 
 	<section>
 		<div class="col_3 sidebar">
-			<div class="loginStation"></div>
+			<div class="loginStation">
+			${sessionScope.loginNick} welcome <a href="checkPassword.do">memberinfo</a><br>
+				 	<a href="logout.do">logout</a>
+			</div>
 
 			<ul>
 				<li id="horror" value="horror" class="genre">HORROR</li>
@@ -57,7 +60,7 @@
 							<td>${horrorBoard.bookb_num}</td>
 							<td>${horrorBoard.writer}</td>
 							<td><a
-								href="read.do?boardNum=${horrorBoard.bookb_num}&p=${horrorBoardPage.currentPage}">
+								href="read.do?bookb_num=${horrorBoard.bookb_num}&p=${horrorBoardPage.currentPage}">
 									${horrorBoard.title}</a></td>
 							<td>${horrorBoard.book_name}</td>
 							<td>${horrorBoard.write_date}</td>

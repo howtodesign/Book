@@ -8,7 +8,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 
-	// 로그인 필요한 페이지 이전에 실행할 메소드
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -21,6 +20,4 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			return false;
 		}
 	}
-
-	
 }
