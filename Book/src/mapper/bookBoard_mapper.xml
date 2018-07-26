@@ -37,7 +37,7 @@ select bookb_num, writer, title, book_name, content, readcount, to_char(sysdate,
 from(
    select rownum as rnum, bookb_num, writer, title, book_name, content, readcount, write_date 
    from (
-		select * from book_board where bb_code=#{bb_code} order by bookb_num desc 
+         select * from book_board where bb_code=#{bb_code} order by bookb_num desc
 			)
 		)where rnum&gt;=#{startRow} and rnum&lt;=#{viewRow}
 </select>
@@ -45,6 +45,21 @@ from(
 <update id="newReadCount">
 update book_board set readcount=readcount+1
 		where bookb_num=#{bookb_num}
+</update>
+
+<select id="selectUpDown" resultMap="result">
+	select recommend, opposite from book_board 
+		where  bookb_num=#{bookb_num}
+</select>
+
+<update id="upRecommend" parameterType="int">
+	update book_board set recommend=recommend+1
+		where  bookb_num=#{bookb_num}
+</update>
+
+<update id="downOpposite" parameterType="int">
+	update book_board set opposite=opposite+1
+		where  bookb_num=#{bookb_num}
 </update>
 
 <resultMap type="BookBoardVO" id="result">

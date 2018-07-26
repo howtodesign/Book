@@ -11,7 +11,7 @@ public class BookBoardPageVO {
 	private int currentPage;
 	private int number;
 	private String bb_code;
-	
+
 	public List<BookBoardVO> getBookBoardList() {
 		return bookBoardList;
 	}

@@ -78,15 +78,14 @@
 		</c:if>
 
 		<c:forEach begin="${horrorBoardPage.startPage}" end="${horrorBoardPage.endPage}" var="i">
-			<a href="horror.do?p=${i}&bb_code=bb101">[${i}]</a>
+			<a href="horror.do?p=${i}&bb_code=${horrorBoardPage.bb_code}">[${i}]</a>
 		</c:forEach>
 
 		<c:if test="${horrorBoardPage.endPage lt horrorBoardPage.totalPage}">
 			<a href="horror.do?p=${horrorBoardPage.endPage+1}&bb_code=${horrorBoardPage.bb_code}">[next]</a>
 		</c:if>
 		
-		 <input type="hidden" name="loginId"
-				value="${sessionScope.loginId}"> <a href="writeForm.do"><button>WRITE</button></a> 
+		 		<a href="writeForm.do"><button>WRITE</button></a> 
 				<a href="main.do"><button>MAIN</button></a> 
 		
 	</div>

@@ -1,7 +1,5 @@
 package vo;
 
-import java.util.Date;
-
 public class BookBoardVO {
 
 	private int bookb_num;

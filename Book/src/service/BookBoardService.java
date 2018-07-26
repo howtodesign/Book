@@ -2,8 +2,6 @@ package service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +23,7 @@ public class BookBoardService {
 	public BookBoardPageVO makePage(int currentPage, String bb_code, BookBoardVO vo) {
 		
 		int totalBoardCount = bookBoardDAO.selectBookBoardCount(bb_code);	
-		System.out.println(vo.getBook_name()+vo.getBb_code());
+		// System.out.println(vo.getBook_name()+vo.getBb_code());
 		int totalPage= totalBoardCount / PAGE_PER_COUNT;
 		if (totalBoardCount % PAGE_PER_COUNT != 0) {
 			totalPage++;
@@ -47,13 +45,10 @@ public class BookBoardService {
 		return new BookBoardPageVO(bookBoardList, startPage, endPage, totalPage, currentPage, number, bb_code);
 	}
 
-	public int insertedBoardNum(BookBoardVO vo, HttpServletRequest request) {
-		vo.setReadcount(0);
-		// 조회수를 영으로 세팅하고, 인서트를 시킴
-		String bb_code= request.getParameter("bb_code");
-		vo.setBb_code(bb_code);
+	public int insertedBoardNum(BookBoardVO vo) {
+		
 		bookBoardDAO.insertBoard(vo);
-
+		System.out.println(vo);
 		return vo.getBookb_num();
 	}
 
@@ -71,4 +66,14 @@ public class BookBoardService {
 		}
 	}
 	
+	public BookBoardVO processUpDown(String code, int bookb_num){
+		if(code.equals("check")){
+			
+		}else if(code.equals("up")){
+			bookBoardDAO.processUp(bookb_num);
+		}else if(code.equals("down")){
+			bookBoardDAO.processDown(bookb_num);
+		}
+		return bookBoardDAO.processUpDown(bookb_num);
+	}
 }
