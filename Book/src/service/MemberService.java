@@ -77,4 +77,13 @@ public class MemberService {
 	public int deleteMember(String id){
 		return dao.deleteMem(id);
 	}
+	
+	//회원등급 확인
+	public boolean isAdmin(String id){
+		if(dao.getFlag(id).equals("admin13")){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

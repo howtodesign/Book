@@ -47,13 +47,9 @@
 		WHERE ID=#{id}
 	</delete>
 	
-	<update id="grantAdmin">
-		UPDATE MEMBER
-		SET
-			FLAG_ADMIN=#{flag_admin}
-		WHERE
-			ID = #{id}
-	</update>
+	<select id="getFlag" parameterType="String" resultType="String">
+		SELECT FLAG_ADMIN FROM MEMBER WHERE ID=#{id}
+	</select>
 	
 	<resultMap type="MemberVO" id="memberMap">
 		<result column="ID" property="id"/>
