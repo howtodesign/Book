@@ -51,6 +51,16 @@
 		SELECT FLAG_ADMIN FROM MEMBER WHERE ID=#{id}
 	</select>
 	
+	<select id="selectDeleteMem" parameterType="String" resultMap="memberMap">
+		SELECT * FROM MEMBER WHERE ID=#{id}
+	</select>
+	
+	<insert id="insertDeleteMem" parameterType="MemberVO">
+		INSERT INTO DELETED_MEMBER
+		VALUES(DELETED_MEMBER_SEQ.NEXTVAL, #{id}, #{password}, #{name},
+		#{nickname}, #{phone}, #{email}, #{regist_date}, #{flag_admin})
+	</insert>
+	
 	<resultMap type="MemberVO" id="memberMap">
 		<result column="ID" property="id"/>
 		<result column="PASSWORD" property="password"/>

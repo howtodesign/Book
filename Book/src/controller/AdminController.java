@@ -92,7 +92,7 @@ public class AdminController {
 	
 	@RequestMapping("/adminKick.do")
 	@ResponseBody
-	public String adminKick(String id){
+	public String adminKick(String id) throws Exception{
 		if(service.kick(id)){
 			return "true";
 		}else{

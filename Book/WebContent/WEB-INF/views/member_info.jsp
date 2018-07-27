@@ -43,8 +43,11 @@ function nickDuplicate() {
 			method : "post",
 			data : {id : userId}, 
 			datatype : "text",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			success : function(result) {
 				if(result != "null"){
+				var Ca = /\+/g;
+				result = decodeURIComponent(result.replace(Ca, " "));
 				var member = JSON.parse(result);
 				$("input[name='name']").attr("value", member.name);
 				$("input[name='nickname']").attr("value", member.nickname);

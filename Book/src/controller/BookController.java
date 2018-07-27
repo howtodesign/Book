@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import repository.FileDAO;
 import service.BookBoardService;
 import service.BookService;
 import service.CommentService;
@@ -151,11 +149,11 @@ public class BookController {
 
 	@RequestMapping("/comment.do")
 	@ResponseBody
-    public void insertComment(HttpServletRequest request,HttpServletResponse response) throws Exception {//ajax는 void형 함수를 사용한다.
+    public void insertComment(@RequestParam(value="con", defaultValue="0")int comment_num, HttpServletRequest request,HttpServletResponse response) throws Exception {//ajax는 void형 함수를 사용한다.
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
-        Map<String, Object> map = commentService.insertComment(request);
+        Map<String, Object> map = commentService.insertComment(comment_num, request);
         
         int result = (int) map.get("result");
         out.println(result);        

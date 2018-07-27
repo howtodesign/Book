@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -77,6 +80,11 @@ public class MemberController {
 	                    +"\",\"regist_date\":\""+member.getRegist_date()
 	                    +"\",\"admin_flag\":\""+member.getFlag_admin()
 	                    +"\",\"email\":\""+member.getEmail()+"\"}";
+	        try {
+				memberJson = URLEncoder.encode(memberJson, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 	    }
 	    else{
 	        memberJson = "null";
