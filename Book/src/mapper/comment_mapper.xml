@@ -11,9 +11,14 @@ values(book_comment_seq.NEXTVAL, #{bookb_num}, #{writer}, #{comment_pw}, #{conte
 </insert>
  
 <select id="commentList" resultMap="result">
-	select * from(
-		select * from book_comment where bookb_num=#{bookb_num} order by write_date desc
-	)order by comment_origin_num desc, write_date
+<!-- 	select * from( -->
+<!-- 		select * from book_comment where bookb_num=#{bookb_num} order by write_date desc -->
+<!-- 	)order by comment_origin_num desc, write_date -->
+	select comment_num, bookb_num, writer, comment_pw, content, comment_origin_num, write_date, bookc_level, flag_lock
+	from book_comment where bookb_num=#{bookb_num}
+		start with bookc_level=0
+		connect by nocycle prior comment_num=comment_origin_num
+		order siblings by comment_origin_num desc
 </select>
 
 <select id="selectCommentLevel" resultType="int">

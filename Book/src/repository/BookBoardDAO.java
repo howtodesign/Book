@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import mapper.BookBoardMapper;
 
 import vo.BookBoardVO;
+import vo.UpdownFlagVO;
 
 
 @Component
@@ -62,5 +63,35 @@ public class BookBoardDAO {
 	public int processDown(int bookb_num){
 		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
 		return bookBoardMapper.downOpposite(bookb_num);
+	}
+	
+	public int processReUp(int bookb_num){
+		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
+		return bookBoardMapper.reRecommend(bookb_num);
+	}
+	
+	public int processReDown(int bookb_num){
+		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
+		return bookBoardMapper.reOpposite(bookb_num);
+	}
+	
+	public int insertUpdownFlag(UpdownFlagVO updown){
+		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
+		return bookBoardMapper.insertUpdownFlag(updown);
+	}
+	
+	public UpdownFlagVO selectUpdownFlag(int bookb_num, String bb_code, String nickname){
+		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
+		return bookBoardMapper.selectUpdownFlag(bookb_num, bb_code, nickname);
+	}
+	
+	public int updateUpdownFlag(UpdownFlagVO updown){
+		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
+		return bookBoardMapper.updateUpdownFlag(updown);
+	}
+	
+	public int deleteUpdownFlag(){
+		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
+		return bookBoardMapper.deleteUpdownFlag();
 	}
 }

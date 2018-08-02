@@ -62,6 +62,36 @@ update book_board set readcount=readcount+1
 		where  bookb_num=#{bookb_num}
 </update>
 
+<update id="reRecommend" parameterType="int">
+	update book_board set recommend=recommend-1
+		where  bookb_num=#{bookb_num}
+</update>
+
+<update id="reOpposite" parameterType="int">
+	update book_board set opposite=opposite-1
+		where  bookb_num=#{bookb_num}
+</update>
+
+<insert id="insertUpdownFlag" parameterType="UpdownFlagVO">
+	insert into updownflag
+	values(updown_seq.nextval, #{flag_up}, #{flag_down}, #{nickname}, #{bookb_num}, #{bb_code}) 
+</insert>
+
+<select id="selectUpdownFlag" resultMap="updownflag">
+	select * from updownflag
+		where nickname=#{nickname} and bookb_num=#{bookb_num} and bb_code=#{bb_code}
+</select>
+
+<update id="updateUpdownFlag" parameterType="UpdownFlagVO">
+	update updownflag set flag_up=#{flag_up}, flag_down=#{flag_down}
+		where nickname=#{nickname} and bookb_num=#{bookb_num} and bb_code=#{bb_code}
+</update>
+
+<delete id="deleteUpdownFlag">
+	delete from updownflag
+		where flag_up=1 or flag_up=0
+</delete>
+
 <resultMap type="BookBoardVO" id="result">
 <result column="bookb_num" property="bookb_num"/>
 <result column="writer" property="writer"/>
@@ -79,5 +109,13 @@ update book_board set readcount=readcount+1
 <result column="opposite" property="opposite"/>
 </resultMap>
 
+<resultMap type="UpdownFlagVO" id="updownflag">
+<result column="updown_num" property="updown_num"/>
+<result column="flag_up" property="flag_up"/>
+<result column="flag_down" property="flag_down"/>
+<result column="nickname" property="nickname"/>
+<result column="bookb_num" property="bookb_num"/>
+<result column="bb_code" property="bb_code"/>
+</resultMap>
 
 </mapper>

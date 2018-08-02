@@ -17,10 +17,10 @@
 								var bookc_level = $(this).find("bookc_level").text();
 								var level = "";
 									for(var i=0; i<bookc_level; i++){
-										level += '┗';
+										level += '　';
 									}
 											table += "<tr id='cName_"+ $(this).find("comment_num").text()+ "'>";
-											table += "<td width="+'10%'+" align="+'left'+">"+level+" "+$(this).find("writer").text()+": "+"</td>";
+											table += "<td width="+'20%'+" align="+'left'+">"+level+" "+$(this).find("writer").text()+": "+"</td>";
 											table += "<td width="+'50%'+" align="+'left'+">"+ $(this).find("content").text()+ "</td>";
 											table += "<td width="+'20%'+" align="+'left'+">"+ $(this).find("write_date").text()+ "</td>";
 											table+="<td>"
@@ -58,12 +58,15 @@
 		$.ajax({
 			url : "processUpDown.do",
 			method : "post",
-			data : {code : "up", bookb_num:"${readBoard.bookb_num}"}, 
+			data : {code : "up", bookb_num:"${readBoard.bookb_num}", bb_code:"${readBoard.bb_code}"}, 
 			datatype : "text",
 			success : function(result) {
 				if(result != "null"){
 				var book = JSON.parse(result);
 				$("#bookup").text(book.recommend);
+				$("#bookdown").text(book.opposite);
+				}else{
+					alert("추천 하루 한번");
 				}
 			},
 			error : function(ex) {
@@ -76,12 +79,15 @@
 		$.ajax({
 			url : "processUpDown.do",
 			method : "post",
-			data : {code : "down", bookb_num:"${readBoard.bookb_num}"}, 
+			data : {code : "down", bookb_num:"${readBoard.bookb_num}", bb_code:"${readBoard.bb_code}"}, 
 			datatype : "text",
 			success : function(result) {
 				if(result != "null"){
 				var book = JSON.parse(result);
+				$("#bookup").text(book.recommend);
 				$("#bookdown").text(book.opposite);
+				}else{
+					alert("반대 하루 한번");
 				}
 			},
 			error : function(ex) {
@@ -153,7 +159,7 @@
 	$.ajax({
 			url : "processUpDown.do",
 			method : "post",
-			data : {code : "check", bookb_num:"${readBoard.bookb_num}"}, 
+			data : {code : "check", bookb_num:"${readBoard.bookb_num}", bb_code:"${readBoard.bb_code}"}, 
 			datatype : "text",
 			success : function(result) {
 				if(result != "null"){

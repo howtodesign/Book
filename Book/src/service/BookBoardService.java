@@ -3,11 +3,13 @@ package service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import repository.BookBoardDAO;
 import vo.BookBoardPageVO;
 import vo.BookBoardVO;
+import vo.UpdownFlagVO;
 
 
 @Component
@@ -66,14 +68,60 @@ public class BookBoardService {
 		}
 	}
 	
-	public BookBoardVO processUpDown(String code, int bookb_num){
+	public BookBoardVO processUpDown(String code, int bookb_num, String bb_code, String nickname){
+		UpdownFlagVO udf = null; 
+		udf =	bookBoardDAO.selectUpdownFlag(bookb_num, bb_code, nickname);
+		int up = 0;
+		int down = 0;
+		if(udf!=null){
+			up = udf.getFlag_up();
+			down = udf.getFlag_down();
+		}else{
+			udf = new UpdownFlagVO();
+			udf.setNickname(nickname);
+			udf.setBookb_num(bookb_num);
+			udf.setBb_code(bb_code);
+		}
 		if(code.equals("check")){
 			
 		}else if(code.equals("up")){
-			bookBoardDAO.processUp(bookb_num);
+			if(up==0 && down==0){
+				udf.setFlag_up(1);
+				udf.setFlag_down(0);
+				bookBoardDAO.insertUpdownFlag(udf);
+				bookBoardDAO.processUp(bookb_num);
+			}else if(up==1 && down==0){
+				return null;
+			}else if(up==0 && down==1){
+				udf.setFlag_up(1);
+				udf.setFlag_down(0);
+				bookBoardDAO.updateUpdownFlag(udf);
+				bookBoardDAO.processUp(bookb_num);
+				bookBoardDAO.processReDown(bookb_num);
+			}
 		}else if(code.equals("down")){
-			bookBoardDAO.processDown(bookb_num);
+			if(up==0 && down==0){
+				udf.setFlag_up(0);
+				udf.setFlag_down(1);
+				bookBoardDAO.insertUpdownFlag(udf);
+				bookBoardDAO.processDown(bookb_num);
+			}else if(up==1 && down==0){
+				udf.setFlag_up(0);
+				udf.setFlag_down(1);
+				bookBoardDAO.updateUpdownFlag(udf);
+				bookBoardDAO.processDown(bookb_num);
+				bookBoardDAO.processReUp(bookb_num);
+			}else if(up==0 && down==1){
+				return null;
+			}
 		}
 		return bookBoardDAO.processUpDown(bookb_num);
+	}
+	
+	//@Scheduled(cron="0 0 24 * * *") 매일 24시 초기화
+	@Scheduled(cron="0 * * * * *") // 테스트를위한 1분마다 초기화
+	public void deleteUpdownFlag(){
+		bookBoardDAO.deleteUpdownFlag();
+		System.out.println("추천반대 리셋");
 	}
 }

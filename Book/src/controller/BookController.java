@@ -190,11 +190,12 @@ public class BookController {
 
 	@RequestMapping("/processUpDown.do")
 	@ResponseBody
-	public void processUpDown(String code, int bookb_num, HttpServletResponse response){
+	public void processUpDown(String code, int bookb_num, String bb_code, HttpServletResponse response, HttpSession session){
 		
 		String bookJson;
+		String loginNick = (String) session.getAttribute("loginNick");
 		
-		BookBoardVO bookboard = service.processUpDown(code, bookb_num);
+		BookBoardVO bookboard = service.processUpDown(code, bookb_num, bb_code, loginNick);
 		
 		if(bookboard != null){
 	        bookJson = "{\"recommend\":\""+bookboard.getRecommend()
