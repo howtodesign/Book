@@ -1,9 +1,12 @@
 package service;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import repository.AdminDAO;
 import repository.MemberDAO;
@@ -89,7 +92,13 @@ public class AdminService {
 	}
 	
 	// kick
-	public boolean kick(String id){
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor={Exception.class})
+	public boolean kick(String id) throws Exception{
+		MemberVO member = mdao.selectDeleteMem(id);
+		mdao.insertDeleteMem(member);
+		if(new Random().nextBoolean()){
+			throw new Exception("에러");
+		}
 		if(mdao.deleteMem(id)>0){
 			return true;
 		}else{

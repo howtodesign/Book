@@ -28,10 +28,17 @@ background: #144E75; }
 				 var bb_code =$(this).attr('id');
 			 location.href = "horror.do?bb_code="+bb_code;
 			 }
-			 
 			 if(selectedGenre=="romance"){
 				 var bb_code =$(this).attr('id');
-			 location.href = "romance.do?bb_code="+bb_code;
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="cook"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="travel"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
 			 }
 			 
 			 return false;
@@ -61,14 +68,16 @@ background: #144E75; }
 				 		<table>
 				 			<tr>
 				 				<td><input type="text" name="userId" placeholder="ID"></td>
+				 				<td rowspan="2"><input type="submit" value="login"><td>
 				 			</tr>
 				 			<tr>
 				 				<td><input type="password" name="userPw" placeholder="Password" >
 				 				<td rowspan="2"><input type="submit" value="login"><td>
 				 			</tr>
 				 		</table>
-				 		<a href="joinForm.do">join</a>  <a>search id/pass</a>
 					</form>
+					<a href="joinForm.do"><button>join</button></a>
+				 	<a><button>search id/pass</button></a>
 				 </c:when>
 				 <c:otherwise>
 				 	${sessionScope.loginNick} welcome  <a href="checkPassword.do">memberinfo</a><br>
@@ -80,31 +89,18 @@ background: #144E75; }
 			<ul>
 				<li id="bb101" value="horror" class="genre">HORROR</li>
 				<li id="bb102" value="romance" class="genre">ROMANCE</li>
-				<li id="cook" value="cook" class="genre">COOK</li>
-				<li id="travel" value="travel" class="genre">TRAVEL</li>
+				<li id="bb103" value="cook" class="genre">COOK</li>
+				<li id="bb104" value="travel" class="genre">TRAVEL</li>
 			</ul>
 		</div>
 		<article class="col_9">
-			<h1 class="title">Monthly Recommendation</h1>
-			
-			<div class="col_3" id="main_thumb1">
-			<table border="1">
-			<tr><td width="100%">main1main1main1main1main1</td></tr>
-			</table>
-			</div>
-			<div class="col_4" id="main_thumb2">
-			<table border="1">
-			<tr><td width="100%">main2</td></tr>
-			</table>
-			</div>
-			<div class="col_5" id="main_thumb3">
-			<table border="1">
-			<tr><td width="100%">main3</td></tr>
-			</table>
-			</div>
-			
-			
-			
+			<h1>London</h1>
+			<p>London is the capital city of England. It is the most populous
+				city in the United Kingdom, with a metropolitan area of over 13
+				million inhabitants.</p>
+			<p>Standing on the River Thames, London has been a major
+				settlement for two millennia, its history going back to its founding
+				by the Romans, who named it Londinium.</p>
 		</article>
 	</section>
 

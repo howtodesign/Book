@@ -11,14 +11,21 @@ $(function() {
 		 var selectedGenre = $(this).attr('value'); 
 		
 		 if(selectedGenre=="horror"){
-			 var bb_code =$(this).attr('id');
-		 location.href = "horror.do?bb_code="+bb_code;
-		 }
-		 
-		 if(selectedGenre=="romance"){
-			 var bb_code =$(this).attr('id');
-		 location.href = "romance.do?bb_code="+bb_code;
-		 }
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="romance"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="cook"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="travel"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
 		 
 		 return false;
 		 });	 
@@ -57,17 +64,17 @@ background: #144E75; }
 			</div>
 
 			<ul>
-				<li id="horror" value="horror" class="genre">HORROR</li>
-				<li id="romance" value="romance" class="genre">ROMANCE</li>
-				<li id="cook" value="cook" class="genre">COOK</li>
-				<li id="travel" value="travel" class="genre">TRAVEL</li>
+				<li id="bb101" value="horror" class="genre">HORROR</li>
+				<li id="bb102" value="romance" class="genre">ROMANCE</li>
+				<li id="bb103" value="cook" class="genre">COOK</li>
+				<li id="bb104" value="travel" class="genre">TRAVEL</li>
 
 			</ul>
 		</div>
 		
 		
 		<article class="col_9">
-			<h1 class="title">HorrorBoard</h1>
+			<h1>${bb_name } Board</h1>
 		
 			<table border="1">
 				<tr>
@@ -75,8 +82,8 @@ background: #144E75; }
 					<th width="15%">writer</th>
 					<th width="30%">title</th>
 					<th width="15%">book_name</th>
-					<th width="20%">write_date</th>
-					<th width="10%">read_count</th>
+					<th width="25%">write_date</th>
+					<th width="5%">read_count</th>
 					
 				</tr>
 
@@ -94,7 +101,7 @@ background: #144E75; }
 							<td>${number-i.index}</td>
 							<td>${horrorBoard.writer}</td>
 							<td><a
-								href="read.do?bookb_num=${horrorBoard.bookb_num}&p=${horrorBoardPage.currentPage}">
+								href="read.do?bookb_num=${horrorBoard.bookb_num}&p=${horrorBoardPage.currentPage}&n=${number-i.index}">
 									${horrorBoard.title}</a></td>
 							<td>${horrorBoard.book_name}</td>
 							<td>${horrorBoard.write_date}</td>
@@ -118,7 +125,7 @@ background: #144E75; }
 			<a href="horror.do?p=${horrorBoardPage.endPage+1}&bb_code=${horrorBoardPage.bb_code}">[next]</a>
 		</c:if>
 		
-		 		<a href="writeForm.do"><button>WRITE</button></a> 
+		 		<a href="writeForm.do?bb_code=${horrorBoardPage.bb_code }"><button>WRITE</button></a> 
 				<a href="main.do"><button>MAIN</button></a> 
 		
 	</div>

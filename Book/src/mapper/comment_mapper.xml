@@ -2,34 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.CommentMapper">
 
-
-<insert id="insertComment">
-insert into book_comment(comment_num, bookb_num, writer, comment_pw, content, comment_origin_num, write_date, bookc_level, flag_lock)
-values(book_comment_seq.NEXTVAL, #{bookb_num}, #{writer}, #{comment_pw}, #{content}, 0, sysdate, 0, 0)
-<selectKey order="AFTER" keyProperty="comment_num" resultType="int">
-			select book_comment_seq.currval from dual
-		</selectKey>
-</insert>
-
-
-<insert id="insertComment2">
+<insert id="insertComment" parameterType="CommentVO">
 insert into book_comment(comment_num, bookb_num, writer, comment_pw, content, comment_origin_num, write_date, bookc_level, flag_lock)
 values(book_comment_seq.NEXTVAL, #{bookb_num}, #{writer}, #{comment_pw}, #{content}, #{comment_origin_num}, sysdate, #{bookc_level}, 0)
 <selectKey order="AFTER" keyProperty="comment_num" resultType="int">
 			select book_comment_seq.currval from dual
 		</selectKey>
-</insert>
+</insert> 
 
 <select id="commentList" resultMap="result">
-select * from book_comment where bookb_num=#{bookb_num} order by comment_num desc
+<!-- 	select * from( -->
+<!-- 		select * from book_comment where bookb_num=#{bookb_num} order by write_date desc -->
+<!-- 	)order by comment_origin_num desc, write_date -->
+	select comment_num, bookb_num, writer, comment_pw, content, comment_origin_num, write_date, bookc_level, flag_lock
+	from book_comment where bookb_num=#{bookb_num}
+		start with bookc_level=0
+		connect by nocycle prior comment_num=comment_origin_num
+		order siblings by comment_origin_num desc
 </select>
 
-<select id="selectBookb_num" resultType="int" parameterType="int">
-select bookb_num from book_comment where comment_num=#{comment_num}
+<select id="selectCommentLevel" resultType="int">
+	select bookc_level from book_comment where comment_num=#{comment_num}
 </select>
 
-<select id="selectBookc_level" resultType="int" parameterType="int">
-select bookc_level from book_comment where comment_num=#{comment_num}
+<select id="selectMaxNum" resultType="int">
+		select coalesce(max(comment_num), 0) from book_comment
+</select>
+
+<select id="selectCommentOriginNum" parameterType="int" resultType="int">
+	select comment_origin_num from book_comment where comment_num=#{comment_num}
 </select>
 
 <resultMap type="CommentVO" id="result">
@@ -38,6 +39,7 @@ select bookc_level from book_comment where comment_num=#{comment_num}
 <result column="writer" property="writer"/>
 <result column="content" property="content"/>
 <result column="comment_pw" property="comment_pw"/>
+<result column="comment_origin_num" property="comment_origin_num"/>
 <result column="write_date" property="write_date"/>
 <result column="bookc_level" property="bookc_level"/>
 <result column="flag_lock" property="flag_lock"/>

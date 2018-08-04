@@ -57,5 +57,15 @@ public class MemberDAO {
 		MemberMapper mapper = template.getMapper(MemberMapper.class);
 		return mapper.getFlag(id);
 	}
+	
+	public MemberVO selectDeleteMem(String id){
+		MemberMapper mapper = template.getMapper(MemberMapper.class);
+		return mapper.selectDeleteMem(id);
+	}
+	
+	public int insertDeleteMem(MemberVO member){
+		MemberMapper mapper = template.getMapper(MemberMapper.class);
+		return mapper.insertDeleteMem(member);
+	}
 
 }

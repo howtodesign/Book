@@ -18,4 +18,6 @@ public interface MemberMapper {
 	public int deleteMem(String id); // 회원 탈퇴
 	public String getFlag(String id); // 회원 등급 확인 
 	
+	public MemberVO selectDeleteMem(String id); // 삭제할 회원 조회
+	public int insertDeleteMem(MemberVO member); // 회원 삭제시 따로 데이터보관
 }

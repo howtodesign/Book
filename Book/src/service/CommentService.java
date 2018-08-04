@@ -33,7 +33,7 @@ public class CommentService {
 	@Autowired
 	private BookBoardService bookBoardService;
 
-	public Map<String, Object> insertComment(HttpServletRequest request) {
+	public Map<String, Object> insertComment(int comment_num, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		CommentVO vo = new CommentVO();
 		String loginNick = (String) session.getAttribute("loginNick");
@@ -42,6 +42,15 @@ public class CommentService {
 		vo.setComment_pw(request.getParameter("comment_pw"));
 		vo.setContent(request.getParameter("content"));
 		vo.setBookb_num(bookb_num);
+		if(comment_num==0){
+		vo.setComment_origin_num(commentDAO.selectMaxNum()+1);	
+		vo.setBookc_level(0);
+		}else{
+		vo.setComment_origin_num(comment_num);
+		int bookc_level = commentDAO.getCommentLevel(comment_num);
+		bookc_level++;
+		vo.setBookc_level(bookc_level);
+		}
 		commentDAO.insertComment(vo);
 		System.out.println("success comment dao proc in commentService");
 		Map<String, Object> map = new HashMap<>();
@@ -61,6 +70,7 @@ public class CommentService {
 			result += "<writer>" + vo.getWriter() + "</writer>";
 			result += "<content>" + vo.getContent() + "</content>";
 			result += "<write_date>" + vo.getWrite_date() + "</write_date>";
+			result += "<bookc_level>"+ vo.getBookc_level() +"</bookc_level>";
 			result += "</comment>";
 		}
 		result += "</comments>";

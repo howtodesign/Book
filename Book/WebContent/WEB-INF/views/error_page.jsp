@@ -8,8 +8,8 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert("update fail");
-		history.go(-1);
+		alert("exception occur");
+		location.href='main.do';
 	</script>
 </body>
 </html>

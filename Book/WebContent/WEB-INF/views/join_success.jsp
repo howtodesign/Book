@@ -2,12 +2,10 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>join complete</title>
 <link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
-
 <body>
 	<header>
 		<h1 class="gradient">Book Review</h1>
@@ -15,30 +13,6 @@
 	</header>
 
 	<section>
-
-		<article class="col_9">
-
-			<div>
-
-				<h2>welcome to join</h2>
-
-				<a href="${pageContext.request.contextPath}">main</a>
-
-			</div>
-
-		</article>
-
-	</section>
-
-
-
-	<footer>
-
-		<p>Footer</p>
-
-	</footer>
-
-	<section>
 		<article class="col_9">
 			<div>
 				<h2>welcome to join</h2>
@@ -50,6 +24,5 @@
 	<footer>
 		<p>Footer</p>
 	</footer>
-
 </body>
 </html>

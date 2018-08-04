@@ -7,9 +7,9 @@
 <link type="text/css" rel="stylesheet" href="resource/style.css">
 </head>
 <body>
-	<script type="text/javascript">
-		alert("update fail");
-		history.go(-1);
-	</script>
+<script type="text/javascript">
+		alert("이용정지");
+		location.href='main.do';
+</script>
 </body>
 </html>

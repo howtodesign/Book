@@ -1,7 +1,11 @@
 package service;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import repository.MemberDAO;
 import vo.MemberVO;
@@ -74,8 +78,12 @@ public class MemberService {
 	}
 	
 	//회원 탈퇴
+	@Transactional(propagation = Propagation.REQUIRED)
 	public int deleteMember(String id){
-		return dao.deleteMem(id);
+		MemberVO member = dao.selectDeleteMem(id);
+		dao.insertDeleteMem(member);
+		int x = dao.deleteMem(id);
+		return x;
 	}
 	
 	//회원등급 확인
