@@ -25,8 +25,8 @@ public class FileService {
 	public void fileUpload(HttpServletRequest request, MultipartFile[] files, BookBoardVO vo, 
 			int insertedBoardNum){
 		
-				//String dirPath = "c:/springFiles/";
-				String dirPath = request.getServletContext().getRealPath("/WEB-INF/img");
+				//String dirPath = "/resources";
+				String dirPath = request.getServletContext().getRealPath("/resource/img");
 				File dir = new File(dirPath);
 
 				if(dir.exists() == false) {
@@ -35,9 +35,10 @@ public class FileService {
 
 				List<FileVO> fileList = new ArrayList<>();
 				for (MultipartFile f : files) {
-					String savedName = new Random().nextInt(1000000000) + "";
+					String savedName = new Random().nextInt(1000000) + "";
 					String originalName = f.getOriginalFilename();
-					String savedPath = dirPath +savedName;
+					String savedPath = dirPath + savedName;
+
 					String bb_code = vo.getBb_code();
 					FileVO myFile = new FileVO();
 

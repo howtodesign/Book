@@ -297,6 +297,7 @@ background: #144E75; }
 				<tr>
 					<td colspan="2"><button id="horrorList" value="${readBoard.bb_code}">BoardList</button>
 				<a href="bookPage.do" target="_blank"><button id="bookAPI" value="bookAPI">bookAPI</button></a>
+				<a href="everNote.do?bookb_num=${readBoard.bookb_num}"><button>evernote</button></a>
 				<!-- <a href="bookPage.do" target="_blank">새창으로 가자</a> -->
 						<%-- <%-- <a href="updateCheck.do?boardNum=${readBoard.boardNum}"><button>modify</button></a>
 						<a href="deleteCheck.do?boardNum=${readBoard.boardNum}"><button>delete</button></a>
