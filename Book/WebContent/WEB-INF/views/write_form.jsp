@@ -14,6 +14,28 @@ $(function() {
 	
 		
 	 })
+	 
+	 $(".genre").click(function(){
+		 var selectedGenre = $(this).attr('value'); 
+		
+		 if(selectedGenre=="horror"){
+			 var bb_code =$(this).attr('id');
+		 location.href = "horror.do?bb_code="+bb_code;
+		 }
+		 if(selectedGenre=="romance"){
+			 var bb_code =$(this).attr('id');
+		 location.href = "horror.do?bb_code="+bb_code;
+		 }
+		 if(selectedGenre=="cook"){
+			 var bb_code =$(this).attr('id');
+		 location.href = "horror.do?bb_code="+bb_code;
+		 }
+		 if(selectedGenre=="travel"){
+			 var bb_code =$(this).attr('id');
+		 location.href = "horror.do?bb_code="+bb_code;
+		 }
+		 return false;
+		 });	 
 })
 </script>
 <link type="text/css" rel="stylesheet" href="resource/style.css">
@@ -32,9 +54,9 @@ $(function() {
 
 			<ul>
 				<li id="bb101" value="horror" class="genre">HORROR</li>
-				<li id="romance" value="romance" class="genre">ROMANCE</li>
-				<li id="cook" value="cook" class="genre">COOK</li>
-				<li id="travel" value="travel" class="genre">TRAVEL</li>
+				<li id="bb102" value="romance" class="genre">ROMANCE</li>
+				<li id="bb103" value="cook" class="genre">COOK</li>
+				<li id="bb104" value="travel" class="genre">TRAVEL</li>
 
 			</ul>
 		</div>
@@ -43,7 +65,7 @@ $(function() {
 
 
 			<form action="write.do" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="bb_code" value="bb101">
+				<input type="hidden" name="bb_code" value="${bb_code }">
 				<table border="1">
 					<tr>
 					<td>book_name:</td>
@@ -71,14 +93,13 @@ $(function() {
 					</tr>
 
 					<tr>
-						<td><input type="submit" value="submit"> <a
-							href="bookPage.do"><button id="bookAPI" name="bookAPI"
-									value="bookAPI">bookAPI</button></a></td>
+						<td colspan="2" align="center"><input type="submit" value="submit"> </td>
 					</tr>
 				</table>
 
 			</form>
-
+<!-- <a	 href="bookPage.do"><button id="bookAPI" name="bookAPI" -->
+<!-- 									value="bookAPI">bookAPI</button></a> -->
 
 
 

@@ -8,8 +8,8 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert("update fail");
-		history.go(-1);
-	</script>
+		alert("로그인 먼저 해주세요.");
+		location.href='main.do';
+</script>
 </body>
 </html>
