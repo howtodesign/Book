@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import service.BookBoardService;
 import service.BookService;
 import service.CommentService;
+import service.EvernoteSubscribeService;
 import service.FileService;
 import vo.BookBoardVO;
 import vo.FileVO;
@@ -42,6 +43,9 @@ public class BookController {
 	
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private EvernoteSubscribeService evernoteSubscribeService;
 	
 	
 	@RequestMapping("/horror.do")
@@ -226,6 +230,13 @@ public class BookController {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }   
+	}
+
+	
+	@RequestMapping(value="/everNote.do")
+	public String everNote(HttpServletRequest request) {
+		evernoteSubscribeService.service(request);
+		return "note_success";
 	}
 
 }

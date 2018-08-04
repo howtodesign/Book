@@ -98,30 +98,27 @@ background: #144E75; }
 			<div class="container">
 				<div class="row">
 				  <div class="col-xs-6 col-md-3" align="center">
-				  	<h2>썸네일</h2>
+				  	<h2>썸네일1</h2>
 				    <a href="#" class="thumbnail">
 				      <img src="resource/img/786972842">
-				      <p align="center"><b><font size="11">Title</font></b></p><br>
-				      <p>whatever it takes 
-				      cause i love the adrenaline in my veins</p>
+				      <p align="center"><b><font size="11">Title1</font></b></p><br>
+				      <p>content1</p>
 				    </a>
 				  </div>
 				  <div class="col-xs-6 col-md-3" align="center">
-				    <h2>썸네일</h2>
+				    <h2>썸네일2</h2>
 				    <a href="#" class="thumbnail">
 				      <img src="resource/img/786972842">
-				      <p align="center"><b><font size="11">Title</font></b></p><br>
-				      <p>whatever it takes 
-				      cause i love the adrenaline in my veins</p>
+				      <p align="center"><b><font size="11">Title2</font></b></p><br>
+				      <p>content2</p>
 				    </a>
 				  </div>
 				  <div class="col-xs-6 col-md-3" align="center">
-				    <h2>썸네일</h2>
+				    <h2>썸네일3</h2>
 				    <a href="#" class="thumbnail">
 				      <img src="resource/img/786972842">
-				      <p align="center"><b><font size="11">Title</font></b></p><br>
-				      <p>whatever it takes 
-				      cause i love the adrenaline in my veins</p>
+				      <p align="center"><b><font size="11">Title3</font></b></p><br>
+				      <p>content3</p>
 				    </a>
 				  </div>
 			</div>
