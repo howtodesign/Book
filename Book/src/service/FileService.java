@@ -25,8 +25,9 @@ public class FileService {
 	public void fileUpload(HttpServletRequest request, MultipartFile[] files, BookBoardVO vo, 
 			int insertedBoardNum){
 		
-				//String dirPath = "/resources";
-				String dirPath = request.getServletContext().getRealPath("/resource/img");
+				//String dirPath = "c:/springFiles/";
+				String dirPath = request.getServletContext().getRealPath("/resource/img/");
+
 				File dir = new File(dirPath);
 
 				if(dir.exists() == false) {

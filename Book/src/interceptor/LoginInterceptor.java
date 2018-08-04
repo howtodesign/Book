@@ -24,6 +24,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 				session.getAttribute("loginId").toString().length()>0){
 			String flag = dao.getFlag((String)session.getAttribute("loginId"));
 			if(flag==null){
+				session.invalidate();
 				response.sendRedirect("memberCheck.do");
 				return false;
 			}
