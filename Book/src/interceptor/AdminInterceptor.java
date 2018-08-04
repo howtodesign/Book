@@ -26,11 +26,13 @@ public class AdminInterceptor extends HandlerInterceptorAdapter{
 			session.getAttribute("flagAdmin").toString().equals("admin11")){
 			String flag = dao.getFlag((String)session.getAttribute("loginId"));
 			if(flag==null){
+				session.invalidate();
 				response.sendRedirect("memberCheck.do");
 				return false;
 			}
 			if(flag.equals("m")){
-				response.sendRedirect("main.do");
+				session.removeAttribute("flagAdmin");
+				response.sendRedirect("revokeAdmin.do");
 				return false;
 			}
 			return true;

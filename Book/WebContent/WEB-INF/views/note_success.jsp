@@ -8,8 +8,8 @@
 </head>
 <body>
 <script type="text/javascript">
-alert("success");
-location.href="main.do";
+	alert("success");
+	location.href="main.do";
 </script>
 </body>
 </html>

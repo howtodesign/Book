@@ -236,7 +236,8 @@ public class BookController {
 	@RequestMapping(value="/everNote.do")
 	public String everNote(HttpServletRequest request) {
 		evernoteSubscribeService.service(request);
-	return "note_success";
+	
+		return "note_success";
 	}
 	
 	

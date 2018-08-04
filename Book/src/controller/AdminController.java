@@ -25,6 +25,11 @@ public class AdminController {
 		return "admin_main";
 	}
 	
+	@RequestMapping("/revokeAdmin.do")
+	public String revokeAdmin(){
+		return "revoke_admin";
+	}
+	
 	@RequestMapping("/adminMemberList.do")
 	public ModelAndView memberList(@RequestParam(value="p", defaultValue="1")int page, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
