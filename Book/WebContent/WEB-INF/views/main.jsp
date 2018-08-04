@@ -72,7 +72,6 @@ background: #144E75; }
 				 			</tr>
 				 			<tr>
 				 				<td><input type="password" name="userPw" placeholder="Password" >
-				 				<td rowspan="2"><input type="submit" value="login"><td>
 				 			</tr>
 				 		</table>
 					</form>
