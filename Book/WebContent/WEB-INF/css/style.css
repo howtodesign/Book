@@ -18,7 +18,7 @@ header {
 	padding: 1px;
 	box-shadow: 2px 2px 1px 1px #aaaaaa;
 	text-align: center;
-	text-decoration: underline overline;
+	text-decoration: underline;
 	text-shadow: 3px 3px 5px navy;
 	-moz-text-shadow: 3px 3px 5px navy;
 	-webkit-text-shadow: 3px 3px 5px navy;
@@ -129,7 +129,7 @@ footer {
 	bottom: 0;
 	width: 100%;
 	text-align: center;
-	box-shadow: 10px 10px 10px 10px #aaaaaa;
+	box-shadow: 10px 10px 1px 1px #aaaaaa;
 	height: 300px;
 }
 

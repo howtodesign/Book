@@ -11,11 +11,26 @@ values(book_comment_seq.NEXTVAL, #{bookb_num}, #{writer}, #{comment_pw}, #{conte
 		</selectKey>
 </insert>
 
+
+<insert id="insertComment2">
+insert into book_comment(comment_num, bookb_num, writer, comment_pw, content, comment_origin_num, write_date, bookc_level, flag_lock)
+values(book_comment_seq.NEXTVAL, #{bookb_num}, #{writer}, #{comment_pw}, #{content}, #{comment_origin_num}, sysdate, #{bookc_level}, 0)
+<selectKey order="AFTER" keyProperty="comment_num" resultType="int">
+			select book_comment_seq.currval from dual
+		</selectKey>
+</insert>
+
 <select id="commentList" resultMap="result">
-select * from book_comment where bookb_num=#{bookb_num} order by write_date desc
+select * from book_comment where bookb_num=#{bookb_num} order by comment_num desc
 </select>
 
+<select id="selectBookb_num" resultType="int" parameterType="int">
+select bookb_num from book_comment where comment_num=#{comment_num}
+</select>
 
+<select id="selectBookc_level" resultType="int" parameterType="int">
+select bookc_level from book_comment where comment_num=#{comment_num}
+</select>
 
 <resultMap type="CommentVO" id="result">
 <result column="comment_num" property="comment_num"/>

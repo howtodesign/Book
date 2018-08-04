@@ -77,6 +77,7 @@
 			</table>
 		</form>
 		<button id="horrorList" value="bb101">horrorList</button>
+		<a href="bookPage.do" target="_blank"><button>bookAPI</button></a>
 		<input type="hidden" name="bookb_num" value="${insertedBoard.bookb_num}">
 		<input type="hidden" name="p" value="${page}">
 			</article>

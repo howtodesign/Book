@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
@@ -13,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +23,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import repository.FileDAO;
 import service.BookBoardService;
 import service.BookService;
 import service.CommentService;
 import service.FileService;
 import vo.BookBoardVO;
+import vo.CommentVO;
 import vo.FileVO;
 
 @Controller
@@ -57,10 +58,30 @@ public class BookController {
 
 	}
 
+	@RequestMapping("/romance.do")
+	public ModelAndView RomancePage(@RequestParam(value="p", defaultValue = "1") int p, String bb_code, BookBoardVO vo) {
+	
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("romanceBoardPage", service.makePage(p, bb_code, vo));
+		mv.setViewName("romanceBoard");
+
+		return mv;
+
+	}
+
+	
 	@RequestMapping("/writeForm.do")
 	public String writeForm() {
 
 		return "write_form";
+
+	}
+
+	
+	@RequestMapping("/writeForm2.do")
+	public String writeForm2() {
+
+		return "write_form2";
 
 	}
 
@@ -95,15 +116,21 @@ public class BookController {
 	}
 
 	@RequestMapping("/read.do")
-	public ModelAndView read(HttpServletRequest request) {
-		int bookb_num = Integer.parseInt(request.getParameter("bookb_num"));
-		int p = Integer.parseInt(request.getParameter("p"));
-		//String bb_code = request.getParameter("bb_code");
-		ModelAndView mv = new ModelAndView("read");
-		mv.addObject("readBoard", service.readWithReadCount(bookb_num));
-		mv.addObject("page", p);
-		mv.addObject("fileList", fservice.getFiles(bookb_num));
-		return mv;
+	public String read(HttpServletRequest request) {
+		Map<String, Object> map = commentService.commentProc(request);
+		String page = (String)map.get("page");
+		BookBoardVO vo = (BookBoardVO)map.get("vo");
+		List<FileVO> fileList = (List<FileVO>) map.get("fileList");
+		List<CommentVO> commentList = (LinkedList<CommentVO>)map.get("commentList");
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("fileList", fileList);
+		request.setAttribute("commentList", commentList);
+		request.getParameter("p");
+
+		
+		return page;
+		
 	}
 	
 	
@@ -193,7 +220,7 @@ public class BookController {
 	@RequestMapping("/processUpDown.do")
 	@ResponseBody
 	public void processUpDown(String code, int bookb_num, HttpServletResponse response){
-		
+	
 		String bookJson;
 		
 		BookBoardVO bookboard = service.processUpDown(code, bookb_num);
@@ -211,5 +238,66 @@ public class BookController {
 	        e.printStackTrace();
 	    }   
 	}
+
+	@RequestMapping("/comment_request.do")
+	public void comment_request(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		  request.setCharacterEncoding("utf-8");
+	        response.setContentType("text/html;charset=utf-8");
+	        PrintWriter out = response.getWriter();  
+	        Map<String, Object> map = commentService.comment_request(request); 
+	        int result = (int) map.get("result");
+	        out.println(result);        
+		
+		
+	}
+	/* @RequestMapping(value = "/community/imageUpload", method = RequestMethod.POST)
+	    public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) {
+	 
+	        OutputStream out = null;
+	        PrintWriter printWriter = null;
+	        response.setCharacterEncoding("utf-8");
+	        response.setContentType("text/html;charset=utf-8");
+	 
+	        try{
+	 
+	            String fileName = upload.getOriginalFilename();
+	            byte[] bytes = upload.getBytes();
+	            String uploadPath = "저장경로/" + fileName;//저장경로
+	            File file = new File(uploadPath);
+	            out = new FileOutputStream(file);
+	            out.write(bytes);
+	            String callback = request.getParameter("CKEditorFuncNum");
+	 
+	            printWriter = response.getWriter();
+	            String fileUrl = "저장한 URL경로/" + fileName;//url경로
+	 
+	            printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
+	                    + callback
+	                    + ",'"
+	                    + fileUrl
+	                    + "','이미지를 업로드 하였습니다.'"
+	                    + ")</script>");
+	            printWriter.flush();
+	 
+	        }catch(IOException e){
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (out != null) {
+	                    out.close();
+	                }
+	                if (printWriter != null) {
+	                    printWriter.close();
+	                }
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	 
+	        return;
+	    }*/
+
+	
 
 }

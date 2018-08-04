@@ -20,9 +20,9 @@ public class FileDAO {
 	}
 
 	
-	public List<FileVO> selectAll(int boardNum){
+	public List<FileVO> selectAll(int bookb_num){
 		FileMapper mapper = template.getMapper(FileMapper.class);
-		return mapper.selectAll(boardNum);
+		return mapper.selectAll(bookb_num);
 	}
 	
 	public FileVO selectFile(int file_num) {

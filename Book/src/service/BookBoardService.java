@@ -29,9 +29,8 @@ public class BookBoardService {
 			totalPage++;
 		}
 		//WHAT IS THIS MEANS...? BOARD BOARD NUM ...../
-		int number = totalBoardCount+(currentPage-1)*PAGE_PER_COUNT;
-		System.out.println("number:"+number);
-		
+		int number = totalBoardCount-(currentPage-1)*PAGE_PER_COUNT;
+	
 		int startRow = (currentPage - 1) * PAGE_PER_BLOCK+1;
 		int endRow= currentPage* PAGE_PER_BLOCK ;
 		List<BookBoardVO> bookBoardList = bookBoardDAO.selectBookBoardOnOnePage(startRow, endRow, bb_code);

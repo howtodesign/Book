@@ -2,35 +2,17 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-<<<<<<< HEAD
 <meta charset=UTF-8">
-<title></title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link href="css/style.css" rel="stylesheet" type="text/css">
-=======
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>join complete</title>
 <link type="text/css" rel="stylesheet" href="resource/style.css">
->>>>>>> refs/remotes/origin/dev
 </head>
+
 <body>
 	<header>
-<<<<<<< HEAD
-=======
 		<h1 class="gradient">Book Review</h1>
 		<h5>dreamING of breaking away from the routine of daily life</h5>
 	</header>
->>>>>>> refs/remotes/origin/dev
-
-<<<<<<< HEAD
-		<h1 class="gradient">Book Review</h1>
-
-		<h5>dreamING of breaking away from the routine of daily life</h5>
-
-	</header>
-
-
 
 	<section>
 
@@ -55,7 +37,7 @@
 		<p>Footer</p>
 
 	</footer>
-=======
+
 	<section>
 		<article class="col_9">
 			<div>
@@ -68,6 +50,6 @@
 	<footer>
 		<p>Footer</p>
 	</footer>
->>>>>>> refs/remotes/origin/dev
+
 </body>
 </html>
