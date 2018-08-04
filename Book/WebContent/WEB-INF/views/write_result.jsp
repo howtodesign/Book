@@ -34,7 +34,7 @@
 			 location.href = "horror.do?bb_code="+bb_code;
 			 }
 			 return false;
-			 });	 
+			 });	
 	})
 	
 	</script>

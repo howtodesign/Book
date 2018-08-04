@@ -51,7 +51,7 @@ public class BookController {
 		mv.addObject("horrorBoardPage", service.makePage(p, bb_code, vo));
 		mv.addObject("bb_name", service.selectBBName(bb_code));
 		mv.setViewName("horrorBoard");
-		
+
 		return mv;
 
 	}
@@ -120,6 +120,7 @@ public class BookController {
 		mv.addObject("fileList", fservice.getFiles(b));
 		return mv;
 	}
+	
 	
 	@RequestMapping("/download.do")
 	@ResponseBody

@@ -24,7 +24,7 @@ public class CommentDAO {
 		CommentMapper mapper = template.getMapper(CommentMapper.class);
 		return mapper.commentList(bookb_num);
 	}
-
+	
 	public int getCommentLevel(int comment_num){
 		CommentMapper mapper = template.getMapper(CommentMapper.class);
 		return mapper.selectCommentLevel(comment_num);

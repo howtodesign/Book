@@ -8,8 +8,8 @@ values(book_comment_seq.NEXTVAL, #{bookb_num}, #{writer}, #{comment_pw}, #{conte
 <selectKey order="AFTER" keyProperty="comment_num" resultType="int">
 			select book_comment_seq.currval from dual
 		</selectKey>
-</insert>
- 
+</insert> 
+
 <select id="commentList" resultMap="result">
 <!-- 	select * from( -->
 <!-- 		select * from book_comment where bookb_num=#{bookb_num} order by write_date desc -->
