@@ -119,7 +119,7 @@ public class BookController {
 		mv.addObject("num", n);
 		mv.addObject("fileList", fservice.getFiles(b));
 		return mv;
-
+	}
 	
 	
 	@RequestMapping("/download.do")

@@ -26,18 +26,18 @@ public class FileService {
 			int insertedBoardNum){
 		
 				//String dirPath = "c:/springFiles/";
-				String dirPath = request.getServletContext().getRealPath("/resources");
+				String dirPath = request.getServletContext().getRealPath("/WEB-INF/img");
 				File dir = new File(dirPath);
 
-				if (dir.exists() == false) {
+				if(dir.exists() == false) {
 					dir.mkdir();
 				}
 
 				List<FileVO> fileList = new ArrayList<>();
 				for (MultipartFile f : files) {
-					/*String savedName = new Random().nextInt(1000000000) + "";*/
+					String savedName = new Random().nextInt(1000000000) + "";
 					String originalName = f.getOriginalFilename();
-					String savedPath = dirPath +"\\" +originalName;
+					String savedPath = dirPath +savedName;
 					String bb_code = vo.getBb_code();
 					FileVO myFile = new FileVO();
 
