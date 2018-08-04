@@ -21,6 +21,16 @@ public class MainController {
 		return "main";
 	}
 	
+	@RequestMapping("/memberCheck.do")
+	public String memberCheck(HttpServletRequest request){
+		return "member_check";
+	}
+	
+	@RequestMapping("/memberBan.do")
+	public String memberBan(HttpServletRequest request){
+		return "member_ban";
+	}
+	
 	@RequestMapping("/joinForm.do") // go to joinPage
 	public String joinForm() {
 		return "join_form";

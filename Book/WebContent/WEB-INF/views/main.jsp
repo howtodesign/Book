@@ -14,9 +14,20 @@
 				 var bb_code =$(this).attr('id');
 			 location.href = "horror.do?bb_code="+bb_code;
 			 }
-			 
+			 if(selectedGenre=="romance"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="cook"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="travel"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
 			 return false;
-			 });	 
+			 });
 	})
 </script>
 <title>This is mainpage</title>
@@ -42,14 +53,15 @@
 				 		<table>
 				 			<tr>
 				 				<td><input type="text" name="userId" placeholder="ID"></td>
+				 				<td rowspan="2"><input type="submit" value="login"><td>
 				 			</tr>
 				 			<tr>
 				 				<td><input type="password" name="userPw" placeholder="Password" >
-				 				<td rowspan="2"><input type="submit" value="login"><td>
 				 			</tr>
 				 		</table>
-				 		<a href="joinForm.do">join</a>  <a>search id/pass</a>
 					</form>
+					<a href="joinForm.do"><button>join</button></a>
+				 	<a><button>search id/pass</button></a>
 				 </c:when>
 				 <c:otherwise>
 				 	${sessionScope.loginNick} welcome  <a href="checkPassword.do">memberinfo</a><br>
@@ -60,9 +72,9 @@
 
 			<ul>
 				<li id="bb101" value="horror" class="genre">HORROR</li>
-				<li id="romance" value="romance" class="genre">ROMANCE</li>
-				<li id="cook" value="cook" class="genre">COOK</li>
-				<li id="travel" value="travel" class="genre">TRAVEL</li>
+				<li id="bb102" value="romance" class="genre">ROMANCE</li>
+				<li id="bb103" value="cook" class="genre">COOK</li>
+				<li id="bb104" value="travel" class="genre">TRAVEL</li>
 			</ul>
 		</div>
 		<article class="col_9">

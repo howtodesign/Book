@@ -50,6 +50,7 @@
 		reply += '	pw:<input type="password" name="comment_pw" size="10">'; 
 		reply += '	<input type="button" value="submit" onclick="submitreply()">';
 		reply += '</form>';
+		$("#sendReply").remove();
 		$("#"+bb).after(reply);
 		$("input[name='con']").attr("value", cc[1]);
 	}
@@ -172,7 +173,28 @@
 				alert(ex);
 			}
 		})
-	
+		
+		$(".genre").click(function(){
+			 var selectedGenre = $(this).attr('value'); 
+			
+			 if(selectedGenre=="horror"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="romance"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="cook"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="travel"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 return false;
+			 });	 
 
 })
 
@@ -198,9 +220,9 @@
 
 			<ul>
 				<li id="bb101" value="horror" class="genre">HORROR</li>
-				<li id="romance" value="romance" class="genre">ROMANCE</li>
-				<li id="cook" value="cook" class="genre">COOK</li>
-				<li id="travel" value="travel" class="genre">TRAVEL</li>
+				<li id="bb102" value="romance" class="genre">ROMANCE</li>
+				<li id="bb103" value="cook" class="genre">COOK</li>
+				<li id="bb104" value="travel" class="genre">TRAVEL</li>
 			</ul>
 		</div>
 
@@ -211,7 +233,7 @@
 			<table border="1">
 				<tr >
 					<td width="10%">num:</td>
-					<td width="90%">${readBoard.bookb_num}</td>
+					<td width="90%">${num}</td>
 				</tr>
 
 				<tr>
@@ -256,7 +278,7 @@
 				</tr>
 
 				<tr>
-					<td colspan="2"><button id="horrorList" value="bb101">horrorList</button>
+					<td colspan="2"><button id="horrorList" value="${readBoard.bb_code}">BoardList</button>
 				<a href="bookPage.do" target="_blank"><button id="bookAPI" value="bookAPI">bookAPI</button></a>
 				<!-- <a href="bookPage.do" target="_blank">새창으로 가자</a> -->
 						<%-- <%-- <a href="updateCheck.do?boardNum=${readBoard.boardNum}"><button>modify</button></a>

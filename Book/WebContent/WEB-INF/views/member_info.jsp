@@ -82,7 +82,7 @@ function nickDuplicate() {
 	<c:if test="${checkpw eq 'getout' }">
 		<script type="text/javascript">
 			alert("dismatched password");
-			history.go(-2);
+			location.href='main.do';
 		</script>
 	</c:if>
 	<c:if test="${checkup eq 'success' }">

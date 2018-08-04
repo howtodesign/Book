@@ -31,7 +31,7 @@ public class BookBoardService {
 			totalPage++;
 		}
 		//WHAT IS THIS MEANS...? BOARD BOARD NUM ...../
-		int number = totalBoardCount+(currentPage-1)*PAGE_PER_COUNT;
+		int number = totalBoardCount-(currentPage-1)*PAGE_PER_COUNT;
 		System.out.println("number:"+number);
 		
 		int startRow = (currentPage - 1) * PAGE_PER_BLOCK+1;
@@ -123,5 +123,9 @@ public class BookBoardService {
 	public void deleteUpdownFlag(){
 		bookBoardDAO.deleteUpdownFlag();
 		System.out.println("추천반대 리셋");
+	}
+	
+	public String selectBBName(String bb_code){
+		return bookBoardDAO.selectBBName(bb_code);
 	}
 }

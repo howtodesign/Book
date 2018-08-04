@@ -28,4 +28,6 @@ public interface BookBoardMapper {
 	public UpdownFlagVO selectUpdownFlag(@Param("bookb_num")int bookb_num, @Param("bb_code")String bb_code, @Param("nickname")String nickname);
 	public int updateUpdownFlag(UpdownFlagVO updown);
 	public int deleteUpdownFlag();
+	
+	public String selectBBName(String bb_code);
 }

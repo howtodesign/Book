@@ -11,7 +11,30 @@
 			var bb_code = $(this).val();
 	
 			location.href = "${pageContext.request.contextPath}/horror.do?bb_code="+bb_code;	
+			return false;
 		})
+		
+		$(".genre").click(function(){
+			 var selectedGenre = $(this).attr('value'); 
+			
+			 if(selectedGenre=="horror"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="romance"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="cook"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 if(selectedGenre=="travel"){
+				 var bb_code =$(this).attr('id');
+			 location.href = "horror.do?bb_code="+bb_code;
+			 }
+			 return false;
+			 });	 
 	})
 	
 	</script>
@@ -33,9 +56,9 @@
 
 			<ul>
 				<li id="bb101" value="horror" class="genre">HORROR</li>
-				<li id="romance" value="romance" class="genre">ROMANCE</li>
-				<li id="cook" value="cook" class="genre">COOK</li>
-				<li id="travel" value="travel" class="genre">TRAVEL</li>
+				<li id="bb102" value="romance" class="genre">ROMANCE</li>
+				<li id="bb103" value="cook" class="genre">COOK</li>
+				<li id="bb104" value="travel" class="genre">TRAVEL</li>
 			</ul>
 		</div>
 		<article class="col_9">
@@ -76,7 +99,7 @@
 
 			</table>
 		</form>
-		<button id="horrorList" value="bb101">horrorList</button>
+		<button id="horrorList" value="${insertedBoard.bb_code}">BoardList</button>
 		<input type="hidden" name="bookb_num" value="${insertedBoard.bookb_num}">
 		<input type="hidden" name="p" value="${page}">
 			</article>

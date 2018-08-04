@@ -94,4 +94,9 @@ public class BookBoardDAO {
 		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
 		return bookBoardMapper.deleteUpdownFlag();
 	}
+	
+	public String selectBBName(String bb_code){
+		BookBoardMapper bookBoardMapper= template.getMapper(BookBoardMapper.class);
+		return bookBoardMapper.selectBBName(bb_code);
+	}
 }

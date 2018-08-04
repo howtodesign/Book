@@ -49,16 +49,18 @@ public class BookController {
 	
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("horrorBoardPage", service.makePage(p, bb_code, vo));
+		mv.addObject("bb_name", service.selectBBName(bb_code));
 		mv.setViewName("horrorBoard");
-
+		
 		return mv;
 
 	}
 
 	@RequestMapping("/writeForm.do")
-	public String writeForm() {
-
-		return "write_form";
+	public ModelAndView writeForm(String bb_code) {
+		ModelAndView mv = new ModelAndView("write_form");
+		mv.addObject("bb_code", bb_code);
+		return mv;
 
 	}
 
@@ -93,17 +95,31 @@ public class BookController {
 	}
 
 	@RequestMapping("/read.do")
-	public ModelAndView read(HttpServletRequest request) {
+	@ResponseBody
+	public void read(HttpServletRequest request, HttpServletResponse response) {
 		int bookb_num = Integer.parseInt(request.getParameter("bookb_num"));
 		int p = Integer.parseInt(request.getParameter("p"));
+		int n = Integer.parseInt(request.getParameter("n"));
 		//String bb_code = request.getParameter("bb_code");
-		ModelAndView mv = new ModelAndView("read");
-		mv.addObject("readBoard", service.readWithReadCount(bookb_num));
-		mv.addObject("page", p);
-		mv.addObject("fileList", fservice.getFiles(bookb_num));
-		return mv;
+		service.readWithReadCount(bookb_num);
+		try {
+			response.sendRedirect("readResult.do?b="+bookb_num+
+					"&p="+p+"&n="+n);
+		} catch (IOException e) {
+			System.out.println("글읽기 실패");
+			e.printStackTrace();
+		}
 	}
 	
+	@RequestMapping("/readResult.do")
+	public ModelAndView readResult(int b, int p, int n) {
+		ModelAndView mv = new ModelAndView("read");
+		mv.addObject("readBoard", service.readWithoutCount(b));
+		mv.addObject("page", p);
+		mv.addObject("num", n);
+		mv.addObject("fileList", fservice.getFiles(b));
+		return mv;
+	}
 	
 	@RequestMapping("/download.do")
 	@ResponseBody
