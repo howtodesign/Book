@@ -4,6 +4,7 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <style type="text/css">
 .title{
 color: white;
@@ -19,6 +20,7 @@ background: #144E75; }
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		 $(".genre").click(function(){
@@ -93,13 +95,37 @@ background: #144E75; }
 			</ul>
 		</div>
 		<article class="col_9">
-			<h1>London</h1>
-			<p>London is the capital city of England. It is the most populous
-				city in the United Kingdom, with a metropolitan area of over 13
-				million inhabitants.</p>
-			<p>Standing on the River Thames, London has been a major
-				settlement for two millennia, its history going back to its founding
-				by the Romans, who named it Londinium.</p>
+			<div class="container">
+				<div class="row">
+				  <div class="col-xs-6 col-md-3" align="center">
+				  	<h2>썸네일</h2>
+				    <a href="#" class="thumbnail">
+				      <img src="resource/img/786972842">
+				      <p align="center"><b><font size="11">Title</font></b></p><br>
+				      <p>whatever it takes 
+				      cause i love the adrenaline in my veins</p>
+				    </a>
+				  </div>
+				  <div class="col-xs-6 col-md-3" align="center">
+				    <h2>썸네일</h2>
+				    <a href="#" class="thumbnail">
+				      <img src="resource/img/786972842">
+				      <p align="center"><b><font size="11">Title</font></b></p><br>
+				      <p>whatever it takes 
+				      cause i love the adrenaline in my veins</p>
+				    </a>
+				  </div>
+				  <div class="col-xs-6 col-md-3" align="center">
+				    <h2>썸네일</h2>
+				    <a href="#" class="thumbnail">
+				      <img src="resource/img/786972842">
+				      <p align="center"><b><font size="11">Title</font></b></p><br>
+				      <p>whatever it takes 
+				      cause i love the adrenaline in my veins</p>
+				    </a>
+				  </div>
+			</div>
+		  </div>
 		</article>
 	</section>
 

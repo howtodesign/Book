@@ -26,7 +26,7 @@ public class FileService {
 			int insertedBoardNum){
 		
 				//String dirPath = "c:/springFiles/";
-				String dirPath = request.getServletContext().getRealPath("/WEB-INF/img");
+				String dirPath = request.getServletContext().getRealPath("/resource/img/");
 				File dir = new File(dirPath);
 
 				if(dir.exists() == false) {
